@@ -1,0 +1,88 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Inqui_model extends CI_Model {
+
+    public function __construct()
+    {
+        parent::__construct();
+        // Your own constructor code
+    }
+
+    public function addinqui()
+    {
+		$nombre     = $_POST['nombre'];
+		$apellido   = $_POST['apellido'];
+		$dni        = strtoupper($_POST['dni']);
+		$telefono   = $_POST['telefono'];
+		$nick       = $_POST['nick'];
+        $pax        = $_POST['pax'];
+        $mail       = strtolower($_POST['mail']);
+        $comentario = $_POST['comentario'];
+
+        $ssql="INSERT INTO inquilinos (nick, nombres, apellidos, dni, telefono, mail, pax, comentario)
+               VALUES('$nick', '$nombre', '$apellido', '$dni', '$telefono', '$mail', $pax, '$comentario')";
+        
+        $this->db->query($ssql);
+
+    }
+
+    public function get_inqui($offset=FALSE, $limite=FALSE)
+    {
+        $this->db->order_by('id','DESC');
+        return $this->db->get('inquilinos', $limite, $offset);
+    }
+
+    public function del_inqui($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('inquilinos');
+    }
+
+    public function get_ficha($id)
+    {
+        return $this->db->get_where('inquilinos', array('id'=>$id));
+    }
+
+    public function find_inqui($busqueda)
+    {
+       $ssql="SELECT * FROM inquilinos WHERE nick LIKE '%$busqueda%' OR nombres LIKE '%$busqueda%' OR apellidos LIKE '%$busqueda%'" ;
+       return $this->db->query($ssql);
+    }
+
+    public function edit_inqui($id)
+    {
+        $nombre = $_POST['nombre'];
+		$apellido = $_POST['apellido'];
+		$dni = strtoupper($_POST['dni']);
+		$telefono = $_POST['telefono'];
+		$nick = $_POST['nick'];
+        $pax = $_POST['pax'];
+        $mail = strtolower($_POST['mail']);
+        $comentario = $_POST['comentario'];
+        
+        $ssql = "UPDATE inquilinos
+                 SET nombres = '$nombre',
+                     apellidos = '$apellido',
+                     dni = '$dni',
+                     telefono = '$telefono',
+                     nick = '$nick',
+                     pax = $pax,
+                     mail = '$mail',
+                     comentario = '$comentario'
+                 WHERE id = $id
+                ";
+        
+        return $this->db->query($ssql);
+    }
+
+    public function total_inqui()
+    {
+        $ssql = $this->db->query("SELECT COUNT(*) as TOTAL from inquilinos");
+        return $ssql->row();
+    }
+        
+
+} // FIn de la Clase
+
+?>

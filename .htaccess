@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f 
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php?/$1 [L,QSA]
+
+    # Prevenir que un usuario acceda a la carpeta system de CI
+    #RewriteCond %{REQUEST_URI} ^system.*
+    #RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+    # Prevenir que un usuario acceda a la carpeta application de CI
+    #RewriteCond %{REQUEST_URI} ^application.*
+    #RewriteRule ^(.*)$ /index.php?/$1 [L]
+</IfModule>
+
