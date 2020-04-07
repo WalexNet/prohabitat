@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Estadisticas extends CI_Controller {
+class Informes extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 	}
 
 	public function index()
 	{
-		$data_enc_cuerpo['lugar'] = "Estad&iacute;sticas";
-		$data_enc_cuerpo['uri'] = "Estadisticas";
+		$data_enc_cuerpo['lugar'] = "Informes";
+		$data_enc_cuerpo['uri'] = "Informes";
 
 		$this->load->view('principal/header'); // Obligado
 		$this->load->view('principal/enca_logo_cuerpo'); // Obligado

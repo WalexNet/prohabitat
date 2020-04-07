@@ -68,36 +68,36 @@
                     <!-- Pagos Usuarios -->
                     <div class="row row-card-no-pd mt--2">
                         <?php foreach($usuarios as $usr): ?>
-                            <?php extract($usr); ?>
-                            <?php $porcentaje = intval(($importe * 100)/$factura->importe); ?>
+                            <?php //extract($usr); ?>
+                            <?php $porcentaje = intval(($usr->importe * 100)/$factura->importe); ?>
 
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <a href="<?= base_url() ?>Inquilinos/ficha/<?= $idusr ?>"><h5 class="card-title"><b><?= $user ?></b></h5></a>
+                                                <a href="<?= base_url() ?>Inquilinos/ficha/<?= $usr->idinqui ?>"><h5 class="card-title"><b><?= $usr->nick ?></b></h5></a>
                                             </div>
-                                            <h3 class="text-info fw-bold">&euro;<?= number_format($importe,2) ?></h3>
+                                            <h3 class="text-info fw-bold">&euro;<?= number_format($usr->importe,2) ?></h3>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted">Periodo: </p>
-                                            <p class="text-muted"><?= $fini.' / '.$ffin ?></p>
+                                            <p class="text-muted"><?= $usr->fdes.' / '.$usr->fhas ?></p>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted">PAX:</p>
-                                            <p class="text-muted"><?= $pax ?></p>
+                                            <p class="text-muted"><?= $usr->pax ?></p>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted mb-0">Paga un <b class="text-info"><?= $porcentaje ?>%</b> del total de factura <b>&euro; <?= $factura->importe ?></b></p>
                                         </div>
-                                        <?php if ($pagado): ?>
+                                        <?php if ($usr->pagado): ?>
                                             <div class="de-flex justify-content-center">
                                                 <button class="btn btn-success">Pagado</button>
                                             </div> 
                                         <?php else: ?>
                                             <div class="de-flex justify-content-center">
-                                                <a href="<?= base_url()?>Pagos/pagar/<?= $idusr.'/'.$factura->id.'/'.$fini.'/'.$ffin.'/'.$importe.'/',$pax ?>"><button class="btn btn-warning">Pagar</button></a>
+                                                <a href="<?= base_url()?>Pagos/pagar/<?= $usr->idinqui.'/'.$factura->id?> " onclick="return confirmar('Una vez realizado el pago no podrá volver atras\nDesea hacer el pago?')"><button class="btn btn-warning">Pagar</button></a>
                                             </div>   
                                         <?php endif; ?>
                                         

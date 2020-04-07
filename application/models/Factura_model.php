@@ -97,6 +97,10 @@ class Factura_model extends CI_Model {
         return $datos;
     }
 
+    public function addpagos($registros){
+        $this->db->insert_batch('recpagos', $registros);
+    }
+
 } // FIn de la Clase
 
 ?>

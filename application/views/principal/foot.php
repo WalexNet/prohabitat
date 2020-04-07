@@ -41,5 +41,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<!-- Atlantis JS -->
 	<script src="<?= base_url() ?>assets/js/atlantis.min.js"></script>
+	<script>
+	function confirmar(msg)
+	{
+		if(confirm(msg))
+			return true;
+		else
+			return false;
+	}
+	</script>
 </body>
 </html>

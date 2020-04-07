@@ -18,33 +18,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pagos_model extends CI_Model {
 
-  // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-  public function __construct()
-  {
-    parent::__construct();
-  }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
-  // ------------------------------------------------------------------------
-  public function add_pago($idusr, $idfactura, $fini, $ffin, $imp, $pax)
-  {
-    // 
-    $sql="INSERT INTO recpagos (idinqui, idfactura, fecha, fdes, fhas, importe, pax)
-          VALUES($idusr, $idfactura, current_timestamp(), '$fini', '$ffin', $imp, $pax)";
-    $this->db->query($sql);
-  }
+    // ------------------------------------------------------------------------
+    public function add_pago($idusr, $idfactura)
+    {
+        // Preparamos la consulta
+        $data['fecha']      = date('Y-m-d H:i:s');
+        $data['pagado']     = true;
+        $where['idinqui']   = $idusr;
+        $where['idfactura'] = $idfactura;
+        
+        $this->db->update('recpagos',$data, $where);
+    }
 
-  public function pagado($idusr, $idfactura)
-  {
-    //
-    $query = $this->db->get_where('recpagos', array('idinqui' => $idusr, 'idfactura' => $idfactura));
-    return $query->result();
-  }
+    public function pagado($idusr, $idfactura)
+    {
+        //
+        $query = $this->db->get_where('recpagos', array('idinqui' => $idusr, 'idfactura' => $idfactura));
+        return $query->result();
+    }
 
-  // ------------------------------------------------------------------------
+    // Buscamos los Usuarios que deben pagar la factura determinada
+    public function usrxfac($idfactura){ 
+        $query = $this->db->get_where('pagos', array('idfactura' => $idfactura));
+        return $query->result();
+    }
+
+    // ------------------------------------------------------------------------
 
 }
 

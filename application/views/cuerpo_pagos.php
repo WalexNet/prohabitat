@@ -73,7 +73,6 @@
 
                             <div class="col-md-6">
                                 <h3 class="card-title">Listado de Facturas</h3>
-                                
                             </div>
 
                             <div class="col-md-6"> <!-- Formulario de busqueda -->

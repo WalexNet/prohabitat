@@ -77,9 +77,9 @@
                 </li>
 
                 <li class="nav-item"> <!-- Estadísticas-->
-                    <a href="<?= base_url()?>Estadisticas">
+                    <a href="<?= base_url()?>Informes">
                         <i class="far fa-chart-bar"></i>
-                        <p>Estad&iacute;sticas</p>
+                        <p>Informes</p>
                     </a>
                 </li>
 
