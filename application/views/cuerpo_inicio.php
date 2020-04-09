@@ -6,9 +6,11 @@
                     <div class="card-header">
                         <h2 class="card-title">Contenido de la p&aacute;gina aqu&iacute;</h2>
                     </div>
+                    
                     <div class="card-body">
 
                     </div>
+
                     <div class="card-footer">
 
                     </div>

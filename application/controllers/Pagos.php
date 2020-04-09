@@ -26,6 +26,8 @@ class Pagos extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        // comprobamos session
+		if (!$this->session->login) redirect('Inicio');
         // Cargamos Modelos
         $this->load->model('Factura_model');
         $this->load->model('Pagos_model');
@@ -102,13 +104,13 @@ class Pagos extends CI_Controller
         $data_enc_cuerpo['lugar'] = "Pagos";
         $data_enc_cuerpo['uri']   = "Pagos";
 
-        $this->load->view('principal/enca_cuerpo',$data_enc_cuerpo); // Obligado
+        $this->load->view('principal/enca_cuerpo',$data_enc_cuerpo);    // Obligado
 
-        $this->load->view('cuerpo_estpagos', $datos);  // Segun corresponda
+        $this->load->view('cuerpo_estpagos', $datos);                   // Segun corresponda
 
         // Estas vistas no se tocan
-        $this->load->view('principal/pie_cuerpo'); // Obligado
-        $this->load->view('principal/foot');       // Obligado
+        $this->load->view('principal/pie_cuerpo');                      // Obligado
+        $this->load->view('principal/foot');                            // Obligado
 
 
     }

@@ -3,7 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Facturas extends CI_Controller {
 	public function __construct(){
-		parent::__construct();
+        parent::__construct();
+        // comprobamos session
+		if (!$this->session->login) redirect('Inicio');
 		// Cargamos Modelos necesarios
 		$this->load->model('Factura_model');
 		$this->load->model('Pisos_model');

@@ -8,6 +8,8 @@ class Inquilinos extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		// comprobamos session
+		if (!$this->session->login) redirect('Inicio');
 		// Cargamos Modelos
 		$this->load->model('Inqui_model');
 		// Cargamos Librerias
@@ -58,9 +60,9 @@ class Inquilinos extends CI_Controller {
 		$data['paginacion'] = $this->paginacion;
 
 
-		$this->load->view('cuerpo_inquilinos', $data); // Segun corresponda
-        $this->load->view('principal/pie_cuerpo'); // Obligado
-		$this->load->view('principal/foot'); // Obligado
+		$this->load->view('cuerpo_inquilinos', $data); 	// Segun corresponda
+        $this->load->view('principal/pie_cuerpo'); 		// Obligado
+		$this->load->view('principal/foot'); 			// Obligado
 	}
 
 	public function alta()

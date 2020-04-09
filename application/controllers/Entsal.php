@@ -8,6 +8,8 @@ class Entsal extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		// comprobamos session
+		if (!$this->session->login) redirect('Inicio');
 		// Cargamos Modelos
 		$this->load->model('Entsal_model');
 		$this->load->model('Pisos_model');

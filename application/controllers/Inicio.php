@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Dompdf\Dompdf;
-
 class Inicio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//$this->load->library('Pdf');
+		// Cargamos modelos
+		$this->load->model('Usuarios_model');
+		$sesdata['login'] = ($this->session->login) ? true: false;
+        $this->session->set_userdata($sesdata);
 	}
 
 	public function index()
@@ -18,29 +19,38 @@ class Inicio extends CI_Controller {
 		$this->load->view('principal/enca_logo_cuerpo'); // Obligado
 		$this->load->view('principal/loginmenu_cuerpo'); // Obligado
 		$this->load->view('principal/enca_cuerpo',$data_enc_cuerpo); // Obligado
-		$this->load->view('cuerpo_inicio'); // Segun corresponda
+
+		if ($this->session->login){
+			$this->load->view('cuerpo_inicio'); // Si esta logeado
+		}else{
+			$this->load->view('cuerpo_inicio_ingreso'); // Formulario de logeo
+		}
+		
 		$this->load->view('principal/pie_cuerpo'); // Obligado
 		$this->load->view('principal/foot'); // Obligado
 	}
 
-	function pruebapdf()
-	{
-		$this->load->library('pdf');
-		$viewdata = array('prueba' => 'hola que tal'); // <-- esto es por si tenemos que pasar parametros a la vista
-		$html = $this->load->view('invoice-print', $viewdata, TRUE);
-		$archivoPDF = "comprobante_pago";
-
-		// Cargamos el contenido HTML
-		$this->pdf->loadHtml($html);
-		// (Optional) Setup the paper size and orientation landscape=Horisontal y portrait=vertical
-		// @see \Dompdf\Adapter\CPDF::PAPER_SIZES for valid sizes
-        $this->pdf->setPaper('A4', 'landscape');
-		// Renderiza el HTML como PDF 
-		$this->pdf->render();
-		// Genere el PDF generado (1 = descargar y 0 = previsualizar) 
-		$this->pdf->stream($archivoPDF,array("Attachment"=>0));
-
-		// $this->pdfgenerator->generate($html, $archivoPDF, true, 'Letter', 'portrait');
+	public function login(){
+		$usr = $this->Usuarios_model->existeUsr();
+		if (isset($usr)){
+			$sesdata['login'] 		= true;
+			$sesdata['usr'] 		= $usr->nomusr;
+			$sesdata['idtecnico'] 	= $usr->idtecnico;
+			$sesdata['nivel']		= $usr->nivel;
+		}else{
+			$sesdata['login'] = false;
+		}
+		$this->session->set_userdata($sesdata);
+		$this->index();
 	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+		$sesdata['login'] = false;
+		$this->session->set_userdata($sesdata);
+		$this->index();
+	}
+
+
 }
 ?>

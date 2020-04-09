@@ -54,13 +54,13 @@ class Entsal_model extends CI_Model {
 
     public function entrada()
     {
-        $idinquilino = $_POST['idusuario'];
-        $idpiso      = $_POST['idpiso'];
+        $idinquilino = $this->input->post('idusuario',true);
+        $idpiso      = $this->input->post('idpiso',true);
         $ocupado     = 1;
-        $fechaE      = $_POST['fechaE'];
-        $lgasE       = $_POST['lgasE'];
-        $lluzE       = $_POST['lluzE'];
-        $laguaE      = $_POST['laguaE'];
+        $fechaE      = $this->input->post('fechaE',true);
+        $lgasE       = $this->input->post('lgasE',true);
+        $lluzE       = $this->input->post('lluzE',true);
+        $laguaE      = $this->input->post('laguaE',true);
 
         $ssql = "INSERT INTO entsal
         (idinquilino, idpiso, ocupado, fechaE, lgasE, lluzE, laguaE)
@@ -75,13 +75,13 @@ class Entsal_model extends CI_Model {
 
     public function salida()
     {
-        $idinqui = $_POST['idinqui'];
-        $id      = $_POST['id'];
+        $idinqui = $this->input->post('idinqui',true);
+        $id      = $this->input->post('id',true);
         $ocupado = 0;
-        $fechaS  = $_POST['fechaS'];
-        $lgasS   = $_POST['lgasS'];
-        $lluzS   = $_POST['lluzS'];
-        $laguaS  = $_POST['laguaS'];
+        $fechaS  = $this->input->post('fechaS',true);
+        $lgasS   = $this->input->post('lgasS',true);
+        $lluzS   = $this->input->post('lluzS',true);
+        $laguaS  = $this->input->post('laguaS',true);
 
         $ssql = "UPDATE entsal
         SET ocupado=$ocupado, fechaS='$fechaS', lgasS=$lgasS, lluzS=$lluzS, laguaS=$laguaS

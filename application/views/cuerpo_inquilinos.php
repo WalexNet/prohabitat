@@ -221,7 +221,7 @@
                                                                         <a href="<?= base_url()?>Inquilinos/editar/<?= $registro->id; ?>"><i class="fa fa-edit"></i></a>
                                                                     </button>
                                                                     <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-danger" data-original-title="Eliminar">
-                                                                        <a href="<?= base_url()?>Inquilinos/baja/<?= $registro->id; ?>"><i class="fa fa-times"></i></a>
+                                                                        <a href="<?= base_url()?>Inquilinos/baja/<?= $registro->id; ?>"onclick="return confirmar('Realmente desea ELIMINAR este usuario?')"><i class="fa fa-times"></i></a>
                                                                     </button>
                                                                 </div>
                                                             </td>

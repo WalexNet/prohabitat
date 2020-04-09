@@ -24,6 +24,8 @@ class Edificios extends CI_Controller
     
 	public function __construct(){
 		parent::__construct();
+		// comprobamos session
+		if (!$this->session->login) redirect('Inicio');
 		// Cargamos modelos
 		$this->load->model('Edificios_model');
 		// Cargamos Librerias

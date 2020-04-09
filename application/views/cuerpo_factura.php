@@ -275,7 +275,7 @@
                                     </div> 
                                 </div>
                                 
-                                <div class="card-footer">
+                                <div class="card-footer"> <!-- Pie de la tabla Paginador y mas datos -->
                                     <div class="row">
 
                                         <div class="col-md-4">
