@@ -16,11 +16,11 @@ class Pisos_model extends CI_Model {
 
     public function add_piso()
     {
-        $idEdificio = $_POST['idEdificio'];
-        $planta     = strtoupper($_POST['planta']);
-        $escalera   = strtoupper($_POST['escalera']);
-        $puerta     = strtoupper($_POST['puerta']);
-        $notas      = $_POST['notas'];
+        $idEdificio = $this->input->post('idEdificio', true);
+        $planta     = strtoupper($this->input->post('planta', true));
+        $escalera   = strtoupper($this->input->post('escalera', true));
+        $puerta     = strtoupper($this->input->post('puerta', true));
+        $notas      = $this->input->post('notas', true);
 
         $ssql = "INSERT INTO pisos (idEdificio, planta, puerta, escalera, notas)
                 VALUES('$idEdificio', '$planta', '$puerta', '$escalera', '$notas')";
@@ -42,11 +42,11 @@ class Pisos_model extends CI_Model {
 
     public function edit_piso($id)
     {
-        $idEdificio = $_POST['idEdificio'];
-        $planta     = strtoupper($_POST['planta']);
-        $escalera   = strtoupper($_POST['escalera']);
-        $puerta     = strtoupper($_POST['puerta']);
-        $notas      = $_POST['notas'];
+        $idEdificio = $this->input->post('idEdificio', true);
+        $planta     = strtoupper($this->input->post('planta', true));
+        $escalera   = strtoupper($this->input->post('escalera', true));
+        $puerta     = strtoupper($this->input->post('puerta', true));
+        $notas      = $this->input->post('notas', true);
 
         $ssql = "UPDATE pisos
         SET idEdificio=$idEdificio, planta='$planta', puerta='$puerta', escalera='$escalera', notas='$notas'

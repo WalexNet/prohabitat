@@ -77,15 +77,23 @@ class Facturas extends CI_Controller {
 
 	public function alta()
 	{
-		//$this->Factura_model->addfactu();
-		// 
-		$ficha = $this->Factura_model->find_factu('ABC321654987'); // strtoupper($this->input->post('numero',true))
+        // Añadimos los factura con los datos 
+		$this->Factura_model->addfactu();
+		// Buscamos esa factura
+		$ficha = $this->Factura_model->find_factu(strtoupper($this->input->post('numero',true))); // 
         $factura = $ficha->row();
+        // En $movimientos guardamos los inquilinos que estuvieron en ese periodo
+        // $movimientos = $this->Factura_model->pagos_factura('2019-09-05', '2019-11-04', 6);
         $movimientos = $this->Factura_model->pagos_factura($factura->fdes, $factura->fhas, $factura->idpiso);
-        // $movimientos = $this->Factura_model->pagos_factura('2019-09-05', '2019-11-04', 6); // prueba
-
+        
         $data   = array();
-        if ($movimientos->result()){
+        if ($movimientos->result()){    // Comprobamos si el piso estuvo ocupado
+                                        // Si hubo usuarios en ese periodo, calculamos los pagos 
+                                        // correspondientes con la funcion:
+                                        // calculoDePagosPorUsuario($movimientos, $factura)
+                                        // con los datos que nos devuelve generamos el arreglo
+                                        // $data con cada uno de los recibos correspondientes
+                                        // a cada usuario
             $pagos = $this->calculoDePagosPorUsuario($movimientos, $factura);
             $x      = 0;
             foreach($pagos['usuarios'] as $datos){
@@ -97,7 +105,8 @@ class Facturas extends CI_Controller {
                 $data[$x]['preuni']     = $pagos['preciounitario'];
                 $x++;
             }
-        }else{
+        }else{                          // Si no tuvo usuarios, ponemos los datos del administrador
+                                        // quien pagará la factura
             $data[0]['fdes']        = $factura->fdes;
             $data[0]['fhas']        = $factura->fhas;
             $data[0]['pax']         = 1;
@@ -109,7 +118,7 @@ class Facturas extends CI_Controller {
             $data[0]['preuni']      = $factura->importe / ($factura->lact - $factura->lant);
 
         }
-
+        // Añadimos los datos a la tabla recpagos (Recibos de Pagos)
         $this->Factura_model->addpagos($data);
 		$this->index();
 	}

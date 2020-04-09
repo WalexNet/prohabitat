@@ -8,7 +8,7 @@
                         <h2 class="card-title">Ingrese sus datos para trabajar</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body"> <!-- Usuario --> 
                         <div class="form-group">
                             <div class="input-icon">
                                 <span class="input-icon-addon">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group"> <!-- Contraseña -->
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                         <i class="fas fa-passport"></i>

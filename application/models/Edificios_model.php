@@ -42,11 +42,11 @@ class Edificios_model extends CI_Model {
 
     public function add_edi()
     {
-        $nombre    = $_POST['nombre'];
-        $direccion = $_POST['direccion'];
-        $cp        = $_POST['cp'];
-        $poblacion = $_POST['poblacion'];
-        $notas     = $_POST['comentario'];
+        $nombre    = $this->input->post('nombre', true);
+        $direccion = $this->input->post('direccion', true);
+        $cp        = $this->input->post('cp', true);
+        $poblacion = $this->input->post('poblacion', true);
+        $notas     = $this->input->post('comentario', true);
 
         $ssql = "INSERT INTO edificios (nombre, direccion, cp, poblacion, notas)
                 VALUES('$nombre', '$direccion', '$cp', '$poblacion', '$notas')";
@@ -79,11 +79,11 @@ class Edificios_model extends CI_Model {
 
     public function edit_edi($id)
     {
-        $nombre    = $_POST['nombre'];
-        $direccion = $_POST['direccion'];
-        $cp        = $_POST['cp'];
-        $poblacion = $_POST['poblacion'];
-        $notas     = $_POST['comentario'];
+        $nombre    = $this->input->post('nombre', true);
+        $direccion = $this->input->post('direccion', true);
+        $cp        = $this->input->post('cp', true);
+        $poblacion = $this->input->post('poblacion', true);
+        $notas     = $this->input->post('comentario', true);
 
         $ssql = "UPDATE edificios
                 SET nombre='$nombre', direccion='$direccion', cp='$cp', poblacion='$poblacion', notas='$notas'

@@ -19,7 +19,7 @@
                     <div class="clearfix"></div>
 
                     <div class="collapse in" id="login">
-                        <ul class="nav ">
+                        <ul class="nav">
                             <li>
                                 <?php if ($this->session->login): ?>
                                     <a href="<?= base_url()?>Inicio/logout">
@@ -38,17 +38,49 @@
             </div>
             <!-- Fin de los datos Login -->
             
-            <ul class=" nav nav-primary ">
+            <ul class="nav nav-primary ">
                 <!-- estas son todas las opciones del menú -->
                 <li class="nav-section"> <!-- Marca las Secciones del Menú -->
-                    <span class="sidebar-mini-icon">
+                    <!-- <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
-                    </span>
+                    </span> -->
                     <h4 class="text-section">Menú Principal</h4>
                 </li>
 
 
                 <?php if ($this->session->login): ?>
+                    <?php if ($this->session->nivel == 0): ?> <!-- Seccion Administrador-->
+                        <li class="nav-item"> 
+                            <a data-toggle="collapse" href="#admin">
+                                <i class="fas fa-diagnoses"></i>
+                                <p>Administración</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="admin">
+                                <ul class="nav nav-collapse">
+                                    <li> <!-- Administrado -->
+                                        <a href="<?= base_url('Administrador')?>">
+                                            <span class="sub-item">Administrador</span>
+                                        </a>
+                                    </li>
+
+                                    <li> <!-- Datos Empresa -->
+                                        <a href="<?= base_url()?>#">
+                                            <span class="sub-item">Datos Empresa</span>
+                                        </a>
+                                    </li>
+
+                                    <li> <!-- Gestion de Accesos -->
+                                        <a href="<?= base_url()?>#">
+                                            <span class="sub-item">Gestión Accesos</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                    <?php endif ?>
+
                     <li class="nav-item"> <!-- Seccion Archivos-->
                         <a data-toggle="collapse" href="#archivos">
                             <i class="fas fa-layer-group"></i>
@@ -69,6 +101,7 @@
                                     </a>
                                 </li>
 
+                                <!-- Estas tablas son de Insidencias y alquileres -->
                                 <li> <!-- Edificios -->
                                     <a href="<?= base_url()?>Edificios">
                                         <span class="sub-item">Edificios</span>
@@ -80,11 +113,24 @@
                                         <span class="sub-item">Pisos</span>
                                     </a>
                                 </li>
+
+                                <!-- Estas Tablas son exclusivas de las insidencias -->
+                                <li> <!-- Aseguradoras -->
+                                    <a href="<?= base_url()?>#">
+                                        <span class="sub-item">Aseguradoras</span>
+                                    </a>
+                                </li>
+
+                                <li> <!-- Profesionales -->
+                                    <a href="<?= base_url()?>#">
+                                        <span class="sub-item">Profesionales</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="nav-item disabled"> <!-- Informes-->
+                    <li class="nav-item"> <!-- Informes-->
                         <a href="<?= base_url()?>Informes">
                             <i class="far fa-chart-bar"></i>
                             <p>Informes</p>
@@ -101,10 +147,44 @@
                     <li class="nav-item"> <!-- Pagos -->
                         <a href="<?= base_url()?>Pagos">
                             <i class="fas fa-donate"></i>
-                            <p>Pagos</p>
+                            <p>Pagos de Facturas Servicios</p>
                         </a>
                     </li> 
+
+                    <!-- Opciones Para sistema de Incidencias -->
+                    <li class="nav-item"> <!-- Menú Incidencias -->
+                        <a data-toggle="collapse" href="#incidencias">
+                            <i class="fas fa-ambulance"></i>
+                            <p>Incidencias</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="incidencias">
+                            <ul class="nav nav-collapse">
+                                
+                                <li> <!-- Seguimiento -->
+                                    <a href="<?= base_url()?>#">
+                                        <span class="sub-item">Seguimiento</span>
+                                    </a>
+                                </li>
+
+                                <li> <!-- Alta Incidencia -->
+                                    <a href="<?= base_url()?>#">
+                                        <span class="sub-item">Alta</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
                 <?php endif ?>
+                
+                <li class="nav-item"> <!-- Salir -->
+                    <a href="<?= base_url()?>Inicio/logout">
+                        <i class="fas fa-door-open"></i>
+                        <p>Salir del Sistema</p>
+                    </a>
+                </li> 
             </ul> <!-- aqui terminan las opciones del menú -->
 
         </div>

@@ -11,14 +11,14 @@ class Inqui_model extends CI_Model {
 
     public function addinqui()
     {
-		$nombre     = $_POST['nombre'];
-		$apellido   = $_POST['apellido'];
-		$dni        = strtoupper($_POST['dni']);
-		$telefono   = $_POST['telefono'];
-		$nick       = $_POST['nick'];
-        $pax        = $_POST['pax'];
-        $mail       = strtolower($_POST['mail']);
-        $comentario = $_POST['comentario'];
+		$nombre     = $this->input->post('nombre', true);
+		$apellido   = $this->input->post('apellido', true);
+		$dni        = strtoupper($this->input->post('dni', true));
+		$telefono   = $this->input->post('telefono', true);
+		$nick       = $this->input->post('nick', true);
+        $pax        = $this->input->post('pax', true);
+        $mail       = strtolower($this->input->post('mail', true));
+        $comentario = $this->input->post('comentario', true);
 
         $ssql="INSERT INTO inquilinos (nick, nombres, apellidos, dni, telefono, mail, pax, comentario)
                VALUES('$nick', '$nombre', '$apellido', '$dni', '$telefono', '$mail', $pax, '$comentario')";
@@ -52,14 +52,14 @@ class Inqui_model extends CI_Model {
 
     public function edit_inqui($id)
     {
-        $nombre = $_POST['nombre'];
-		$apellido = $_POST['apellido'];
-		$dni = strtoupper($_POST['dni']);
-		$telefono = $_POST['telefono'];
-		$nick = $_POST['nick'];
-        $pax = $_POST['pax'];
-        $mail = strtolower($_POST['mail']);
-        $comentario = $_POST['comentario'];
+        $nombre = $this->input->post('nombre', true);
+		$apellido = $this->input->post('apellido', true);
+		$dni = strtoupper($this->input->post('dni', true));
+		$telefono = $this->input->post('telefono', true);
+		$nick = $this->input->post('nick', true);
+        $pax = $this->input->post('pax', true);
+        $mail = strtolower($this->input->post('mail', true));
+        $comentario = $this->input->post('comentario', true);
         
         $ssql = "UPDATE inquilinos
                  SET nombres = '$nombre',
