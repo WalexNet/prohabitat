@@ -13,6 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link      www.walex.net
  * @param     ...
  * @return    ...
+ * 
+ * **************************************************************
+ * En este modelos trabajaremos con dos tablas, la tabla        *
+ * tecnicos y usuarios, ya que llevam relaciones entre ellas    *
+ * **************************************************************
  *
  */
 
@@ -42,6 +47,17 @@ class Tecnicos_model extends CI_Model {
     public function datosAdmin(){
         $res = $this->db->get_where('tecnicos', array('id' => 1));
         return $res->row();
+    }
+
+    public function updatePsw($idTecnico){
+        $data['psw'] = md5($this->input->post('psw', true));
+        $this->db->update('usuarios', $data, "idtecnico = $idTecnico");
+    }
+
+    public function getPsw($idTecnico){
+        $res = $this->db->get_where('usuarios', array('idtecnico' => $idTecnico));
+        $psw = $res->row();
+        return $psw->psw;
     }
 
     // ------------------------------------------------------------------------

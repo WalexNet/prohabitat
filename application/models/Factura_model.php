@@ -87,6 +87,18 @@ class Factura_model extends CI_Model {
         return $this->db->query($ssql);
     }
 
+    /**
+     * Esta Función nos devuelve los usuarios que han estado en ese piso, en el periodo correspondiente
+     * Por Ejemplo si el periodo da la factura "X" es de: 2019-09-13 hasta 2019-12-12 y la factura
+     * pertenece al piso con ID 6, esta funcion nos devolveria la siguinte tabla:
+     * 
+     * id|idinquilino|idpiso|usuario|ocupado|fechaE    |lgasE |lluzE |laguaE|fechaS    |lgasS|lluzS |laguaS|notas|
+     * --|-----------|------|-------|-------|----------|------|------|------|----------|-----|------|------|-----|
+     *  5|         10|     6|Pedro  |      1|2019-08-13|452147|241200|   105|          |    0|     0|     0|     |
+     *  6|          7|     6|Rosario|      0|2019-09-01|  5412|241240|   110|2019-11-02|21451|241265|   190|     |
+     *  7|          8|     6|Halima |      1|2019-10-22| 87451|241245|   165|          |    0|     0|     0|     |
+     *  8|          9|     6|Alina  |      1|2019-09-10| 14854|241240|   145|          |    0|     0|     0|     |
+     */
     public function pagos_factura($fdes, $fhas, $piso)
     {
         $ssql = "CALL userxfactura('$fdes', '$fhas', '$piso')"; // En CI da error los Procedures

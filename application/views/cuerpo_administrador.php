@@ -66,9 +66,9 @@
 
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer"> <!-- Botones Guardar, Cambiar PSW y Cancelar -->
                             <div class="row">
-                                
+
                                  <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">Guardar Datos</button>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#formPsw">Cambiar Contraseña</button>
@@ -88,9 +88,9 @@
                 </form>
             </div> <!-- Fin del div del cuerpo principal -->
 
-            <!-- Modal -->
+            <!-- Modal Form cambio de contraseña-->
             <div class="modal fade" id="formPsw" tabindex="-1" role="dialog" aria-labelledby="formPsw" aria-hidden="true">
-                <form action="<?= base_url('#') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                <form action="<?= base_url('Administrador/changePsw') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -102,7 +102,16 @@
                             </div>
                             <div class="modal-body">
 
-                                <div class="form-group"> <!-- Contraseña -->
+                                <div class="form-group"> <!-- Contraseña Anterior -->
+                                    <div class="input-icon">
+                                            <span class="input-icon-addon">
+                                                <i class="fas fa-passport"></i>
+                                            </span>
+                                        <input type="password" name="pswAnterior" class="form-control" id="pswAnterior" placeholder="Password Actual/Anterior">
+                                    </div>
+                                </div>
+
+                                <div class="form-group"> <!-- Contraseña Nueva 1 -->
                                     <div class="input-icon">
                                             <span class="input-icon-addon">
                                                 <i class="fas fa-passport"></i>
@@ -111,14 +120,14 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group"> <!-- Contraseña2-->
+                                <div class="form-group"> <!-- Contraseña Nueva 2 -->
                                     <div class="input-icon">
                                             <span class="input-icon-addon">
                                                 <i class="fas fa-passport"></i>
                                             </span>
                                         <input type="password" name="psw2" class="form-control" id="txtConfirmPassword" placeholder="Repita el Password">
                                     </div>
-                            </div>
+                                </div>
 
                             </div>
                             <div class="modal-footer">
@@ -132,4 +141,7 @@
         </div>
     </div>
 
+    <?php if (isset($errorPswAnterior)):?>
+    <script>alert('El password Actual no es valido!!\n\nVuelva a intentarlo')</script>
+    <?php endif; ?>
 

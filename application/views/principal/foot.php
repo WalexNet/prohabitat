@@ -41,25 +41,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<!-- Atlantis JS -->
 	<script src="<?= base_url() ?>assets/js/atlantis.min.js"></script>
-	
-	<script>
-		function confirmar(msg)
-		{
-			if(confirm(msg))
-				return true;
-			else
-				return false;
-		}
 
-		function ValidarPsw() {
-			var password = document.getElementById("txtPassword").value;
-			var confirmPassword = document.getElementById("txtConfirmPassword").value;
-			if (password != confirmPassword) {
-				alert("Las contraseñas no son iguales");
-				return false;
-			}
-			return true;
-		}
-	</script>
+	<!-- Mis Funciones JS -->
+	<script src="<?= base_url() ?>assets/js/misFunciones.js"></script>
+	
+	
 </body>
 </html>

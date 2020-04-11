@@ -19,7 +19,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Administrador extends CI_Controller
 {
-    
+    // Declaracion de propiedades
+    private $datos = array();
+
     public function __construct()
     {
         parent::__construct();
@@ -32,7 +34,8 @@ class Administrador extends CI_Controller
 
     public function index()
     {
-        $datos['admin'] = $this->Tecnicos_model->datosAdmin();
+        $this->tmp='hola';
+        $this->datos['admin'] = $this->Tecnicos_model->datosAdmin();
 
         $data_enc_cuerpo['lugar']   = "Administración";
 		$data_enc_cuerpo['uri']     = "Administrador";
@@ -42,7 +45,7 @@ class Administrador extends CI_Controller
 		$this->load->view('principal/loginmenu_cuerpo');                // 
 		$this->load->view('principal/enca_cuerpo',$data_enc_cuerpo);    // 
 
-        $this->load->view('cuerpo_administrador', $datos);                      // 
+        $this->load->view('cuerpo_administrador', $this->datos);                      // 
 		
 		$this->load->view('principal/pie_cuerpo');                      // 
 		$this->load->view('principal/foot');                            // 
@@ -51,6 +54,18 @@ class Administrador extends CI_Controller
     public function actualizaDatos(){
         $this->Tecnicos_model->updateAdmin();
         redirect('Inicio');
+    }
+
+    public function changePsw(){
+        $psw = md5($this->input->post('pswAnterior', true));
+        if($psw == $this->Tecnicos_model->getPsw(1)){
+            $this->Tecnicos_model->updatePsw(1);
+            redirect('Inicio');
+        }else{
+            $this->datos['errorPswAnterior'] = true;
+            $this->index();
+        }
+            
     }
 
 }
