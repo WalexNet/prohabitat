@@ -76,8 +76,7 @@ class Facturas extends CI_Controller {
 		$this->index(0,TRUE, $ficha);
 	}
 
-	public function alta()
-	{
+	public function alta(){
         // Añadimos los factura con los datos 
         $this->Factura_model->addfactu();
         
@@ -88,38 +87,12 @@ class Facturas extends CI_Controller {
         // $movimientos = $this->Factura_model->pagos_factura('2019-09-13', '2019-12-12', 6);
         $movimientos = $this->Factura_model->pagos_factura($factura->fdes, $factura->fhas, $factura->idpiso);
 
-        $data   = array();
-        if ($movimientos->result()){    // Comprobamos si el piso estuvo ocupado
-                                        // Si hubo usuarios en ese periodo, calculamos los pagos 
-                                        // correspondientes con la funcion:
-                                        // calculoDePagosPorUsuario($movimientos, $factura)
-                                        // con los datos que nos devuelve generamos el arreglo
-                                        // $data con cada uno de los recibos correspondientes
-                                        // a cada usuario
-            $pagos = $this->calculoDePagosPorUsuario($movimientos, $factura);
-            $x      = 0;
-            foreach($pagos['usuarios'] as $datos){
-                foreach($datos as $id => $linea){
-                    $data[$x][$id] = $linea;
-                }
-                $data[$x]['idfactura']  = $pagos['idfac'];
-                $data[$x]['confac']     = $pagos['consumo_factura'];
-                $data[$x]['preuni']     = $pagos['preciounitario'];
-                $x++;
-            }
-        }else{                          // Si no tuvo usuarios, ponemos los datos del administrador
-                                        // quien pagará la factura
-            $data[0]['fdes']        = $factura->fdes;
-            $data[0]['fhas']        = $factura->fhas;
-            $data[0]['pax']         = 1;
-            $data[0]['idinqui']     = 1;
-            $data[0]['descuento']   = 0;
-            $data[0]['importe']     = $factura->importe;
-            $data[0]['idfactura']   = $factura->id;
-            $data[0]['confac']      = $factura->lact - $factura->lant;
-            $data[0]['preuni']      = $factura->importe / ($factura->lact - $factura->lant);
+        
+        $data   = $this->prepararTablaPagos($movimientos, $factura);
 
-        }
+        ///******** */
+        
+        // }
         // Añadimos los datos a la tabla recpagos (Recibos de Pagos)
        
         $this->Factura_model->addpagos($data);
@@ -146,10 +119,22 @@ class Facturas extends CI_Controller {
 	{
 		// Pasamos los datos del formulario y lo mandamos al Modelo
 		// una vez cargamos los datos del formulario los modificamos en la tabla
-		$ficha = $this->Factura_model->edit_factu($this->input->post('id',true));
+        $this->Factura_model->edit_factu($this->input->post('id',true));
+        
+        // Buscamos esa factura
+		$ficha = $this->Factura_model->find_factu(strtoupper($this->input->post('numero',true))); // 
+        $factura = $ficha->row();
+        // En $movimientos guardamos los inquilinos que estuvieron en ese periodo
+        $movimientos = $this->Factura_model->pagos_factura($factura->fdes, $factura->fhas, $factura->idpiso);
+
+        $data = $this->prepararTablaPagos($movimientos, $factura);
+
+        $this->Factura_model->modificaBatch($data, $factura->id);
+
 		$this->index();
 
-	}
+    }
+    
 	public function buscar(){
 		$busqueda = $this->Factura_model->find_factu($this->input->post('buscar_factura',true));
 		$this->index(0,FALSE,NULL,$busqueda);
@@ -670,6 +655,41 @@ class Facturas extends CI_Controller {
         $final  = strtotime($fechafin);
 
         return (($fecha >= $inicio) && ($fecha <= $final));
+    }
+
+    public function prepararTablaPagos($movimientos, $factura){
+        if ($movimientos->result()){    // Comprobamos si el piso estuvo ocupado
+            // Si hubo usuarios en ese periodo, calculamos los pagos 
+            // correspondientes con la funcion:
+            // calculoDePagosPorUsuario($movimientos, $factura)
+            // con los datos que nos devuelve generamos el arreglo
+            // $data con cada uno de los recibos correspondientes
+            // a cada usuario
+            $pagos = $this->calculoDePagosPorUsuario($movimientos, $factura);
+            $x     = 0;
+            foreach($pagos['usuarios'] as $datos){
+                foreach($datos as $id => $linea){
+                    $data[$x][$id] = $linea;
+                    }
+                $data[$x]['idfactura']  = $pagos['idfac'];
+                $data[$x]['confac']     = $pagos['consumo_factura'];
+                $data[$x]['preuni']     = $pagos['preciounitario'];
+                $x++;
+            }
+        }else{          // Si no tuvo usuarios, ponemos los datos del administrador
+                        // quien pagará la factura
+            $data[0]['fdes']        = $factura->fdes;
+            $data[0]['fhas']        = $factura->fhas;
+            $data[0]['pax']         = 1;
+            $data[0]['idinqui']     = 1;
+            $data[0]['descuento']   = 0;
+            $data[0]['importe']     = $factura->importe;
+            $data[0]['idfactura']   = $factura->id;
+            $data[0]['confac']      = $factura->lact - $factura->lant;
+            $data[0]['preuni']      = $factura->importe / ($factura->lact - $factura->lant);
+        }
+        return $data;
+
     }
 }
 ?>
