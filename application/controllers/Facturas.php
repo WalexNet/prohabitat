@@ -115,8 +115,7 @@ class Facturas extends CI_Controller {
 		$this->index(0,FALSE,$ficha,NULL,TRUE);
 	}
 
-	public function modificar()
-	{
+	public function modificar(){
 		// Pasamos los datos del formulario y lo mandamos al Modelo
 		// una vez cargamos los datos del formulario los modificamos en la tabla
         $this->Factura_model->edit_factu($this->input->post('id',true));
@@ -332,10 +331,10 @@ class Facturas extends CI_Controller {
         {
             if ($linea['fecha'] <= $factura->fdes)
             {
-                $fper[$x]['fecha']    = $factura->fdes;
+                $fper[$x]['fecha']   = $factura->fdes;
                 $fper[$x]['lec_con'] = $factura->lant;
             }else{
-                $fper[$x]['fecha']    = $linea['fecha'];
+                $fper[$x]['fecha']   = $linea['fecha'];
                 $fper[$x]['lec_con'] = $linea['servicio'];
             } 
             $fper[$x]['usr']   = $linea['usuario'];
@@ -371,8 +370,8 @@ class Facturas extends CI_Controller {
                 $periodos[$nper]['fdes'] = $linea['fecha'];
                 $periodos[$nper]['lant'] = $linea['lec_con']; //*
             }else{
-                $fechaux = $linea['fecha'];
-                $lecAux  = $linea['lec_con']; //*
+                $fechaux                 = $linea['fecha'];
+                $lecAux                  = $linea['lec_con']; //*
                 $periodos[$nper]['fhas'] = $fechaux; // 
                 $periodos[$nper]['lact'] = $lecAux; //*
                 $nper ++;
@@ -552,7 +551,7 @@ class Facturas extends CI_Controller {
                     'contador'  => $linea['cons'],      // Consumo del periodo (lact-lant)
                     'paxper'    => $linea['paxper'],    // Pax Total del periodo
                     'impper'    => $linea['impcons'],   // Importe a pagar
-                    'idinqui'     => $user['id'],       // ID de usuario
+                    'idinqui'   => $user['id'],       // ID de usuario
                     'nick'      => $user['usu'],        // Nick
                     'paxusr'    => $user['pax'],        // Pax usuario
                     'descuento' => $user['descuento'],  // Descuento si lo tuviese
@@ -626,9 +625,9 @@ class Facturas extends CI_Controller {
                     'fdes'      => $linea['fdes'],              // Fecha inicio periodo
                     'fhas'      => $linea['fhas'],              // Fecha final periodo
                     'pax'       => $linea['paxusr'],            // Pax
-                    'idinqui'     => $linea['idinqui'],             // ID de usuario
+                    'idinqui'   => $linea['idinqui'],           // ID de usuario
                     'descuento' => $linea['descuento'],         // Descuento
-                    'importe' => sumar_column($usr,'impusr'), // Importe a pagar
+                    'importe'   => sumar_column($usr,'impusr'), // Importe a pagar
                 );
             }
         }
@@ -658,7 +657,7 @@ class Facturas extends CI_Controller {
     }
 
     public function prepararTablaPagos($movimientos, $factura){
-        if ($movimientos->result()){    // Comprobamos si el piso estuvo ocupado
+        if ($movimientos->result()){ // Comprobamos si el piso estuvo ocupado
             // Si hubo usuarios en ese periodo, calculamos los pagos 
             // correspondientes con la funcion:
             // calculoDePagosPorUsuario($movimientos, $factura)
@@ -692,4 +691,3 @@ class Facturas extends CI_Controller {
 
     }
 }
-?>
