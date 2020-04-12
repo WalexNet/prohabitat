@@ -41,7 +41,7 @@ class Inqui_model extends CI_Model {
 
     public function get_ficha($id)
     {
-        return $this->db->get_where('inquilinos', array('id'=>$id));
+        return $this->db->get_where('inquilinos', ['id'=>$id]);
     }
 
     public function find_inqui($busqueda)
@@ -52,13 +52,13 @@ class Inqui_model extends CI_Model {
 
     public function edit_inqui($id)
     {
-        $nombre = $this->input->post('nombre', true);
-		$apellido = $this->input->post('apellido', true);
-		$dni = strtoupper($this->input->post('dni', true));
-		$telefono = $this->input->post('telefono', true);
-		$nick = $this->input->post('nick', true);
-        $pax = $this->input->post('pax', true);
-        $mail = strtolower($this->input->post('mail', true));
+        $nombre     = $this->input->post('nombre', true);
+		$apellido   = $this->input->post('apellido', true);
+		$dni        = strtoupper($this->input->post('dni', true));
+		$telefono   = $this->input->post('telefono', true);
+		$nick       = $this->input->post('nick', true);
+        $pax        = $this->input->post('pax', true);
+        $mail       = strtolower($this->input->post('mail', true));
         $comentario = $this->input->post('comentario', true);
         
         $ssql = "UPDATE inquilinos

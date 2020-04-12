@@ -41,12 +41,8 @@
             <ul class="nav nav-primary ">
                 <!-- estas son todas las opciones del menú -->
                 <li class="nav-section"> <!-- Marca las Secciones del Menú -->
-                    <!-- <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span> -->
                     <h4 class="text-section">Menú Principal</h4>
                 </li>
-
 
                 <?php if ($this->session->login): ?>
                     <?php if ($this->session->nivel == 0): ?> <!-- Seccion Administrador-->
@@ -65,7 +61,7 @@
                                     </li>
 
                                     <li> <!-- Datos Empresa -->
-                                        <a href="<?= base_url()?>#">
+                                        <a href="<?= base_url('Administrador/indexdatempresa')?>">
                                             <span class="sub-item">Datos Empresa</span>
                                         </a>
                                     </li>

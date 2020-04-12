@@ -20,54 +20,79 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Administrador extends CI_Controller
 {
     // Declaracion de propiedades
-    private $datos = array();
+    private $datos = [];
 
     public function __construct()
     {
         parent::__construct();
         // comprobamos session
         if (!$this->session->login) redirect('Inicio');
-        
+
         // Cargamos Modelos
         $this->load->model('Tecnicos_model');
+        $this->load->model('Inqui_model');
     }
 
     public function index()
     {
-        $this->tmp='hola';
         $this->datos['admin'] = $this->Tecnicos_model->datosAdmin();
 
         $data_enc_cuerpo['lugar']   = "Administración";
-		$data_enc_cuerpo['uri']     = "Administrador";
+        $data_enc_cuerpo['uri']     = "Administrador";
 
-		$this->load->view('principal/header');                          // 
-		$this->load->view('principal/enca_logo_cuerpo');                // 
-		$this->load->view('principal/loginmenu_cuerpo');                // 
-		$this->load->view('principal/enca_cuerpo',$data_enc_cuerpo);    // 
+        $this->load->view('principal/header');                          // 
+        $this->load->view('principal/enca_logo_cuerpo');                // 
+        $this->load->view('principal/loginmenu_cuerpo');                // 
+        $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // 
 
-        $this->load->view('cuerpo_administrador', $this->datos);                      // 
-		
-		$this->load->view('principal/pie_cuerpo');                      // 
-		$this->load->view('principal/foot');                            // 
+        $this->load->view('cuerpo_administrador', $this->datos);        // 
+
+        $this->load->view('principal/pie_cuerpo');                      // 
+        $this->load->view('principal/foot');                            // 
     }
 
-    public function actualizaDatos(){
+    public function indexdatempresa()
+    {
+        $res = $this->Inqui_model->get_ficha(1);
+        $this->datos['emp'] = $res->row();
+
+        $data_enc_cuerpo['lugar']   = "Administración";
+        $data_enc_cuerpo['uri']     = "Administrador";
+
+        $this->load->view('principal/header');                          // 
+        $this->load->view('principal/enca_logo_cuerpo');                // 
+        $this->load->view('principal/loginmenu_cuerpo');                // 
+        $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // 
+
+        $this->load->view('cuerpo_datosempresa', $this->datos);         // 
+
+        $this->load->view('principal/pie_cuerpo');                      // 
+        $this->load->view('principal/foot');                            // 
+    }
+
+    public function actualizaDatos()
+    {
         $this->Tecnicos_model->updateAdmin();
         redirect('Inicio');
     }
 
-    public function changePsw(){
+    public function changePsw()
+    {
         $psw = md5($this->input->post('pswAnterior', true));
-        if($psw == $this->Tecnicos_model->getPsw(1)){
+        if ($psw == $this->Tecnicos_model->getPsw(1)) {
             $this->Tecnicos_model->updatePsw(1);
             redirect('Inicio');
-        }else{
+        } else {
             $this->datos['errorPswAnterior'] = true;
             $this->index();
         }
-            
     }
 
+    public function actualizaDatosEmp()
+    {
+        $this->Inqui_model->edit_inqui(1);
+        redirect('Inicio');
+    }
 }
 
 

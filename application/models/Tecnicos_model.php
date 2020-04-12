@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
@@ -21,11 +21,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 
-class Tecnicos_model extends CI_Model {
+class Tecnicos_model extends CI_Model
+{
 
     // ------------------------------------------------------------------------
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -33,7 +35,8 @@ class Tecnicos_model extends CI_Model {
 
 
     // ------------------------------------------------------------------------
-    public function updateAdmin(){
+    public function updateAdmin()
+    {
         $data['nombres']   = $this->input->post('nombres', true);
         $data['apellidos'] = $this->input->post('apellidos', true);
         $data['nomcorto']  = $this->input->post('nomcorto', true);
@@ -44,17 +47,20 @@ class Tecnicos_model extends CI_Model {
         $this->db->update('tecnicos', $data, "id = 1"); // El Id 1 es el admin si o si
     }
 
-    public function datosAdmin(){
+    public function datosAdmin()
+    {
         $res = $this->db->get_where('tecnicos', array('id' => 1));
         return $res->row();
     }
 
-    public function updatePsw($idTecnico){
+    public function updatePsw($idTecnico)
+    {
         $data['psw'] = md5($this->input->post('psw', true));
         $this->db->update('usuarios', $data, "idtecnico = $idTecnico");
     }
 
-    public function getPsw($idTecnico){
+    public function getPsw($idTecnico)
+    {
         $res = $this->db->get_where('usuarios', array('idtecnico' => $idTecnico));
         $psw = $res->row();
         return $psw->psw;

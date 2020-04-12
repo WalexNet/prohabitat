@@ -1,7 +1,6 @@
                    <div class="page-category">
                        <!-- Dentro de este DIV es donde ponemos los componentes o sea, nuestro cuerpo de accion -->
                        <div class="container-fluid">
-
                            <!-- Tarjeta/Ficha Datos Edificio -->
                            <?php if ($ficha) : ?>
                                <!-- Si se pide ficha muestra ficha -->
@@ -207,20 +206,16 @@
                            <!-- Tabla Principal inicio-->
                            <?php if (!$ficha && !$edita) : ?>
                                <!-- Si se pide ficha o edicion, no entra en Tabla -->
-                               <div class="row">
-                                   <!-- Tabla -->
+                               <div class="row"><!-- Tabla -->
                                    <div class="col-md-12">
                                        <div class="card">
-                                           <div class="card-header">
-                                               <!-- Título de la Tabla y FORM Buscador -->
+                                           <div class="card-header"><!-- Título de la Tabla y FORM Buscador -->
                                                <div class="row">
                                                    <!-- Row Formulario-->
                                                    <div class="col-md-6">
                                                        <h3 class="card-title">Listado de Edificios</h3>
                                                    </div>
-                                                    <!-- Probando Bookmarks -->
-                                                   <div class="col-md-6">
-                                                       <!-- Formulario de busqueda -->
+                                                   <div class="col-md-6"> <!-- Formulario de busqueda -->
                                                        <form role="form" action="<?= base_url() ?>Edificios/buscar" method="POST">
                                                            <!-- Formulario -->
                                                            <div class="input-group input-group-sm hidden-xs">
@@ -236,8 +231,7 @@
                                                </div>
                                            </div>
 
-                                           <div class="card-body">
-                                               <!-- Aqui va la tabla -->
+                                           <div class="card-body"><!-- Aqui va la tabla -->
                                                <div class="table-responsive">
                                                    <table class="display table table-hover" cellspacing="0" width="100%">
                                                        <thead>
@@ -258,8 +252,7 @@
                                                                <th width="10%"><label>Acci&oacute;nes</label></th>
                                                            </tr>
                                                        </tfoot>
-                                                       <tbody>
-                                                           <!-- Cuerpo de la tabla -->
+                                                       <tbody> <!-- Cuerpo de la tabla -->
 
                                                            <?php foreach ($consulta->result() as $registro) : ?>
                                                                <tr>
@@ -295,19 +288,19 @@
                                            <div class="card-footer">
                                                <div class="row">
 
-                                                   <div class="col-md-4">
+                                                   <div class="col-md-4"> <!-- Paginacion -->
                                                        <?php if ($paginacion) : ?>
                                                            <?= $this->pagination->create_links() ?>
                                                        <?php endif; ?>
                                                    </div>
 
-                                                   <div class="col-md-4">
+                                                   <div class="col-md-4"> <!-- Informcaion -->
                                                        <div class="row justify-content-center">
                                                            <p>1 de 400 pages</p>
                                                        </div>
                                                    </div>
 
-                                                   <DIV class="col-md-4">
+                                                   <DIV class="col-md-4"> <!-- Boton Añade edificio -->
                                                        <div class="row justify-content-end">
                                                            <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addEdificio">
                                                                <i class="fa fa-plus"></i>
@@ -318,7 +311,6 @@
 
                                                </div>
                                            </div>
-
                                        </div> <!-- Fin Card-->
                                    </div>
                                </div>
@@ -340,47 +332,40 @@
                                                    <span aria-hidden="true">&times;</span>
                                                </button>
                                            </div>
-                                           <div class="modal-body">
+                                           <div class="modal-body"><!-- Formulario -->
                                                <p class="small">Datos Edificio</p>
-
                                                <form role="form" action="<?= base_url() ?>Edificios/alta" method="POST">
-                                                   <!-- Formulario -->
                                                    <div class="row">
 
-                                                       <div class="col-md-12">
-                                                           <!-- Nombre Edificio -->
+                                                       <div class="col-md-12"><!-- Nombre Edificio -->
                                                            <div class="form-group form-group-default">
                                                                <label>Nombre</label>
                                                                <input type="text" name="nombre" class="form-control" placeholder="Nombre Edificio">
                                                            </div>
                                                        </div>
 
-                                                       <div class="col-md-12">
-                                                           <!-- Dirección -->
+                                                       <div class="col-md-12"><!-- Dirección -->
                                                            <div class="form-group form-group-default">
                                                                <label>Direcci&oacute;n</label>
                                                                <input type="text" name="direccion" placeholder="Direcci&oacute;n del Edificio" class="form-control">
                                                            </div>
                                                        </div>
 
-                                                       <div class="col-md-4">
-                                                           <!-- CP -->
+                                                       <div class="col-md-4"><!-- CP -->
                                                            <div class="form-group form-group-default">
                                                                <label>C&oacute;digo Postal</label>
                                                                <input type="text" name="cp" class="form-control" placeholder="C&oacute;digo Postal">
                                                            </div>
                                                        </div>
 
-                                                       <div class="col-md-8">
-                                                           <!-- Población -->
+                                                       <div class="col-md-8"><!-- Población -->
                                                            <div class="form-group form-group-default">
                                                                <label>Poblaci&oacute;n</label>
                                                                <input type="text" name="poblacion" class="form-control" placeholder="Poblaci&oacute;n">
                                                            </div>
                                                        </div>
 
-                                                       <div class="col-md-12">
-                                                           <!-- Notas sobre el edificio -->
+                                                       <div class="col-md-12"><!-- Notas sobre el edificio -->
                                                            <div class="form-group form-group-default">
                                                                <label>Notas</label>
                                                                <textarea class="form-control" name="comentario" placeholder="Escriba aqui sus Notas" rows="5"></textarea>
@@ -394,7 +379,6 @@
                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                                    </div>
                                                </form> <!-- fin del formulario -->
-
                                            </div>
                                        </div>
                                    </div>
@@ -468,9 +452,6 @@
 
                                </div>
                            <?php endif; ?>
-
-
-
                        </div> <!-- Fin container fluid -->
 
                    </div> <!-- Fin del div del cuerpo principal -->
