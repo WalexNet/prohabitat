@@ -14,10 +14,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @param     ...
  * @return    ...
  * 
- * **************************************************************
- * En este modelos trabajaremos con dos tablas, la tabla        *
- * tecnicos y usuarios, ya que llevam relaciones entre ellas    *
- * **************************************************************
+ *  ****************************************************************
+ *  * En este modelo trabajaremos con dos tablas, las tablas       *
+ *  * tecnicos y Perfiles, ya que llevam relaciones entre ellas    *
+ *  ****************************************************************
  *
  */
 
@@ -34,25 +34,6 @@ class Tecnicos_model extends CI_Model
     // ------------------------------------------------------------------------
 
 
-    // ------------------------------------------------------------------------
-    public function updateAdmin()
-    {
-        $data['nombres']   = $this->input->post('nombres', true);
-        $data['apellidos'] = $this->input->post('apellidos', true);
-        $data['nomcorto']  = $this->input->post('nomcorto', true);
-        $data['dni']       = $this->input->post('dni', true);
-        $data['telefono']  = $this->input->post('telefono', true);
-        $data['mail']      = $this->input->post('mail', true);
-
-        $this->db->update('tecnicos', $data, "id = 1"); // El Id 1 es el admin si o si
-    }
-
-    public function datosAdmin()
-    {
-        $res = $this->db->get_where('tecnicos', array('id' => 1));
-        return $res->row();
-    }
-
     public function updatePsw($idTecnico)
     {
         $data['psw'] = md5($this->input->post('psw', true));
@@ -66,6 +47,85 @@ class Tecnicos_model extends CI_Model
         return $psw->psw;
     }
 
+    public function get_tecnic($offset=FALSE, $limite=FALSE)
+    {
+        $this->db->order_by('id','DESC');
+        return $this->db->get('tecnicos', $limite, $offset);
+    }
+
+    public function total_tecnic()
+    {
+        $ssql = $this->db->query("SELECT COUNT(*) as TOTAL from tecnicos");
+        return $ssql->row();
+    }
+
+    public function ficha($id)
+    {
+        $res = $this->db->get_where('tecnicos', ['id' => $id]);
+        return $res->row();
+    }
+
+    public function usr_perfil($id)
+    {
+        $res = $this->db->get_where('perfiles', ['idtecnico' => $id]);
+        return $res->result();
+    }
+
+    public function add_tecnic()
+    {
+        $data['nombres']    = $this->input->post('nombres', true);
+        $data['apellidos']  = $this->input->post('apellidos', true);
+        $data['nomcorto']   = $this->input->post('nomcorto', true);
+        $data['dni']        = strtoupper($this->input->post('dni', true));
+        $data['telefono']   = $this->input->post('telefono', true);
+        $data['mail']       = $this->input->post('mail', true);
+        $data['comentario'] = $this->input->post('comentario', true);
+        return $this->db->insert('tecnicos', $data);
+    }
+
+    public function edit_tecnic($id)
+    {
+        $data['nombres']    = $this->input->post('nombres', true);
+        $data['apellidos']  = $this->input->post('apellidos', true);
+        $data['nomcorto']   = $this->input->post('nomcorto', true);
+        $data['dni']        = strtoupper($this->input->post('dni', true));
+        $data['telefono']   = $this->input->post('telefono', true);
+        $data['mail']       = $this->input->post('mail', true);
+        $data['comentario'] = $this->input->post('comentario', true);
+        return $this->db->update('tecnicos', $data, ['id' => $id]);
+    }
+
+    public function del_tecnic($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('tecnicos');
+    }
+
+    public function add_perfil($idTecnico)
+    {
+        $data['nomusr']     = $this->input->post('nomusr', true);
+        $data['psw']        = md5($this->input->post('psw', true));
+        $data['nivel']      = $this->input->post('nivel', true);
+        $data['idtecnico']  = $idTecnico;
+        switch ($data['nivel']) {
+            case 0:
+                $data['descnivel'] = 'ADMINISTRADOR';
+                break;
+            case 1:
+                $data['descnivel'] = 'TECNICO';
+                break;
+            case 2:
+                $data['descnivel'] = 'OFICINA';
+                break;
+        }
+        return $this->db->insert('perfiles', $data);
+    }
+
+    public function del_perfil($idperfil)
+    {
+        $this->db->where('id', $idperfil);
+        $this->db->delete('perfiles');
+    }
     // ------------------------------------------------------------------------
 
 }

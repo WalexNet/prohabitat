@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Inquilinos extends CI_Controller {
 
 	// Propiedades
-	public $paginacion = TRUE;
+	private $paginacion = TRUE;
 
 	public function __construct(){
 		parent::__construct();
@@ -23,7 +23,7 @@ class Inquilinos extends CI_Controller {
 		$limite = 5;											 // Cantidad de registros a mostrar
 		$total_inquilinos = $this->Inqui_model->total_inqui();	 // Nos devuelve el total de registros
 
-		$config['base_url']    = base_url().'Inquilinos/index/'; // La funcion que llamara el paginador
+		$config['base_url']    = base_url('Inquilinos/index/');  // La funcion que llamara el paginador
 		$config['total_rows']  = $total_inquilinos->TOTAL; 		 // Total de registros de la consulta
 		$config['per_page']    = $limite;						 // Numero de registros a mostrar por pagina
 		$config['uri_segment'] = 3;
@@ -111,4 +111,3 @@ class Inquilinos extends CI_Controller {
 
 
 } // Fin Class Inquilinos
-?>

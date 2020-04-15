@@ -17,7 +17,7 @@ function ValidarPsw() {
     if (password != confirmPassword) {
         document.getElementById("txtPassword").value='';
         document.getElementById("txtConfirmPassword").value='';
-        alert("La contraseña Nueva no coinciden");
+        alert("Las contraseñas no coinciden");
         return false;
     }
     return true;

@@ -37,7 +37,7 @@ class Usuarios_model extends CI_Model {
     public function  existeUsr(){
         $datos['nomusr']    = $this->input->post('usr', true);
         $datos['psw']       = md5($this->input->post('psw', true));
-        $res = $this->db->get_where('usuarios', $datos);
+        $res = $this->db->get_where('perfiles', $datos);
         $fila = $res->row();
         return $fila; //(isset($fila)) ? true : false;
     }

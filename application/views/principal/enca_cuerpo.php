@@ -18,14 +18,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url()?><?= $uri ?>"><i> <?= $lugar ?></i></a>
-                        
                     </li>
-                    <!-- <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Starter Page</a>
-                    </li> -->
                 </ul>
 
             </div> <!-- final del encabezado -->

@@ -30,31 +30,14 @@ class Administrador extends CI_Controller
 
         // Cargamos Modelos
         $this->load->model('Tecnicos_model');
-        $this->load->model('Inqui_model');
+        $this->load->model('Configuracion_model');
+
+        // Cargamos Helpers
     }
 
     public function index()
     {
-        $this->datos['admin'] = $this->Tecnicos_model->datosAdmin();
-
-        $data_enc_cuerpo['lugar']   = "Administración";
-        $data_enc_cuerpo['uri']     = "Administrador";
-
-        $this->load->view('principal/header');                          // 
-        $this->load->view('principal/enca_logo_cuerpo');                // 
-        $this->load->view('principal/loginmenu_cuerpo');                // 
-        $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // 
-
-        $this->load->view('cuerpo_administrador', $this->datos);        // 
-
-        $this->load->view('principal/pie_cuerpo');                      // 
-        $this->load->view('principal/foot');                            // 
-    }
-
-    public function indexdatempresa()
-    {
-        $res = $this->Inqui_model->get_ficha(1);
-        $this->datos['emp'] = $res->row();
+        $this->datos['emp'] = $this->Configuracion_model->getEmpresa();
 
         $data_enc_cuerpo['lugar']   = "Administración";
         $data_enc_cuerpo['uri']     = "Administrador";
@@ -70,27 +53,10 @@ class Administrador extends CI_Controller
         $this->load->view('principal/foot');                            // 
     }
 
-    public function actualizaDatos()
-    {
-        $this->Tecnicos_model->updateAdmin();
-        redirect('Inicio');
-    }
-
-    public function changePsw()
-    {
-        $psw = md5($this->input->post('pswAnterior', true));
-        if ($psw == $this->Tecnicos_model->getPsw(1)) {
-            $this->Tecnicos_model->updatePsw(1);
-            redirect('Inicio');
-        } else {
-            $this->datos['errorPswAnterior'] = true;
-            $this->index();
-        }
-    }
 
     public function actualizaDatosEmp()
     {
-        $this->Inqui_model->edit_inqui(1);
+        $this->Configuracion_model->editEmpresa();
         redirect('Inicio');
     }
 }

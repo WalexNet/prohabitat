@@ -40,6 +40,7 @@ class Inicio extends CI_Controller
 			$sesdata['usr'] 		= $usr->nomusr;
 			$sesdata['idtecnico'] 	= $usr->idtecnico;
 			$sesdata['nivel']		= $usr->nivel;
+			$sesdata['descnivel']	= $usr->descnivel;
 		} else {
 			$sesdata['login'] = false;
 		}

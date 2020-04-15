@@ -12,7 +12,7 @@
                     <a data-toggle="collapse" href="#login" aria-expanded="true">
                         <span>
                             Bienvenido: <?= ($this->session->login) ? $this->session->usr : 'invitado'; ?>
-                            <span class="user-level"><?= ($this->session->login) ? $this->session->namelevel : 'No Autorizado'; ?></span>
+                            <span class="user-level"><?= ($this->session->login) ? $this->session->descnivel : 'No Autorizado'; ?></span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -54,21 +54,16 @@
                             </a>
                             <div class="collapse" id="admin">
                                 <ul class="nav nav-collapse">
-                                    <li> <!-- Administrado -->
-                                        <a href="<?= base_url('Administrador')?>">
-                                            <span class="sub-item">Administrador</span>
-                                        </a>
-                                    </li>
 
                                     <li> <!-- Datos Empresa -->
-                                        <a href="<?= base_url('Administrador/indexdatempresa')?>">
+                                        <a href="<?= base_url('Administrador')?>">
                                             <span class="sub-item">Datos Empresa</span>
                                         </a>
                                     </li>
 
                                     <li> <!-- Gestion de Accesos -->
-                                        <a href="<?= base_url()?>#">
-                                            <span class="sub-item">Gestión Accesos</span>
+                                        <a href="<?= base_url('Gestaccesos')?>">
+                                            <span class="sub-item">Técnicos / Accessos</span>
                                         </a>
                                     </li>
 
