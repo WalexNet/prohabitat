@@ -3,13 +3,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Inicio extends CI_Controller
 {
+	// Propiedades
+	private $data = [];
+
 	public function __construct()
 	{
 		parent::__construct();
-		// Cargamos modelos
-		$this->load->model('Usuarios_model');
+		// Comprobamos Sesiones
 		$sesdata['login'] = ($this->session->login) ? true : false;
 		$this->session->set_userdata($sesdata);
+		// Cargamos modelos
+		$this->load->model('Usuarios_model');
+		$this->load->model('Factura_model');
 	}
 
 	public function index()
@@ -30,6 +35,14 @@ class Inicio extends CI_Controller
 
 		$this->load->view('principal/pie_cuerpo'); // Obligado
 		$this->load->view('principal/foot'); // Obligado
+	}
+
+	public function datosFacturas()
+	{
+		$facturasPagadas 	= $this->Factura_model->fac_pagadas();
+		$facturasPtes		= $this->Factura_model->fac_ptes();
+		$data = [count($facturasPtes), count($facturasPagadas)];
+		echo json_encode($data);
 	}
 
 	public function login()
@@ -55,4 +68,6 @@ class Inicio extends CI_Controller
 		$this->session->set_userdata($sesdata);
 		$this->index();
 	}
+
+
 }

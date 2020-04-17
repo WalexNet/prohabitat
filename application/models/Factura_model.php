@@ -121,4 +121,22 @@ class Factura_model extends CI_Model
             $this->db->update('recpagos', $fila, "idfactura = $idfactura");
         }
     }
+
+    public function fac_pagadas($fdes = null, $fhas = null)
+    {
+        if(($fdes != null) && ($fhas != null)){
+            $this->db->where("$fdes BETWEEN", $fhas);
+        };
+        $res = $this->db->get('fac_pagadas');
+        return $res->result();
+    }
+
+    public function fac_ptes($fdes = null, $fhas = null)
+    {
+        if(($fdes != null) && ($fhas != null)){
+            $this->db->where("ffactura BETWEEN '$fdes'"." AND", $fhas);
+        };
+        $res = $this->db->get('fac_ptes');
+        return $res->result();
+    }
 } // FIn de la Clase

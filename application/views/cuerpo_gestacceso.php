@@ -12,7 +12,7 @@
                             <div class="col-md-6">
                                 <form role="form" action="<?= base_url('Gestaccesos/buscar')?>" method="POST"> <!-- Formulario --> 
                                     <div class="input-group input-group-sm hidden-xs" >
-                                        <input type="text" name="buscar_inquilino" class="form-control" placeholder="Buscar por nombre, apellido, nick">
+                                        <input type="text" name="tecnic" class="form-control" placeholder="Buscar parcialmente por nombre, apellido, nick ó DNI">
 
                                         <div class="input-group-btn">
                                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>

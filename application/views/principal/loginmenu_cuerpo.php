@@ -122,10 +122,27 @@
                     </li>
 
                     <li class="nav-item"> <!-- Informes-->
-                        <a href="<?= base_url()?>Informes">
+                        <a data-toggle="collapse" href="#info">
                             <i class="far fa-chart-bar"></i>
-                            <p>Informes</p>
+                            <p>informes</p>
+                            <span class="caret"></span>
                         </a>
+                        <div class="collapse" id="info">
+                            <ul class="nav nav-collapse">
+
+                                <li> <!-- Estado Facturas -->
+                                    <a href="<?= base_url('Estadofacturas')?>">
+                                        <span class="sub-item">Estado Facturas</span>
+                                    </a>
+                                </li>
+                                <li> <!-- Estado Incidencas -->
+                                    <a href="<?= base_url('#')?>">
+                                        <span class="sub-item">Estado Incidencias</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="nav-item"> <!-- Entradas/Salidas -->

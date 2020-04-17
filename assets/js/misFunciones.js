@@ -3,6 +3,7 @@
  * FUNCIONES DE USO GERAL PARA CONFIRMAR ACCIONES Y VALIDAR PSW
  */
 
+
 function confirmar(msg)
 {
     if(confirm(msg))
@@ -22,3 +23,4 @@ function ValidarPsw() {
     }
     return true;
 }
+

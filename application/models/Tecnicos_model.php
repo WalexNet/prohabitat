@@ -103,21 +103,13 @@ class Tecnicos_model extends CI_Model
 
     public function add_perfil($idTecnico)
     {
+        $perfil             = ['ADMINISTRADOR', 'TECNICO', 'OFICINA'];
         $data['nomusr']     = $this->input->post('nomusr', true);
         $data['psw']        = md5($this->input->post('psw', true));
         $data['nivel']      = $this->input->post('nivel', true);
         $data['idtecnico']  = $idTecnico;
-        switch ($data['nivel']) {
-            case 0:
-                $data['descnivel'] = 'ADMINISTRADOR';
-                break;
-            case 1:
-                $data['descnivel'] = 'TECNICO';
-                break;
-            case 2:
-                $data['descnivel'] = 'OFICINA';
-                break;
-        }
+        $data['descnivel']  = $perfil[$data['nivel']];
+
         return $this->db->insert('perfiles', $data);
     }
 
@@ -125,6 +117,13 @@ class Tecnicos_model extends CI_Model
     {
         $this->db->where('id', $idperfil);
         $this->db->delete('perfiles');
+    }
+
+    public function find_tecnic()
+    {
+        $tecnico = $this->input->post('tecnic', true);
+        $ssql = "SELECT * FROM tecnicos WHERE nomcorto LIKE '%$tecnico%' OR nombres LIKE '%$tecnico%' OR apellidos LIKE '%$tecnico%' OR dni LIKE '%$tecnico%'";
+        return $this->db->query($ssql);
     }
     // ------------------------------------------------------------------------
 

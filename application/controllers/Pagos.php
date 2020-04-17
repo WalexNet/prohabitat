@@ -89,7 +89,7 @@ class Pagos extends CI_Controller
         $this->load->view('principal/foot');       // Obligado
     }
 
-    public function vista_pagos($datos = array())
+    public function vista_pagos($datos = [])
     {
 
         // Estas vistas no se tocan

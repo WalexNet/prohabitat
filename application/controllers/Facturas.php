@@ -81,7 +81,7 @@ class Facturas extends CI_Controller {
         $this->Factura_model->addfactu();
         
 		// Buscamos esa factura
-		$ficha = $this->Factura_model->find_factu(strtoupper($this->input->post('numero',true))); // 
+		$ficha = $this->Factura_model->find_factu(strtoupper($this->input->post('numero',true))); // strtoupper($this->input->post('numero',true))
         $factura = $ficha->row();
         // En $movimientos guardamos los inquilinos que estuvieron en ese periodo
         // $movimientos = $this->Factura_model->pagos_factura('2019-09-13', '2019-12-12', 6);
@@ -89,6 +89,8 @@ class Facturas extends CI_Controller {
 
         
         $data   = $this->prepararTablaPagos($movimientos, $factura);
+
+        // echo '<br>'; print_r($data);
 
         ///******** */
         
@@ -239,8 +241,8 @@ class Facturas extends CI_Controller {
         //   echo "<pre>";
         //   echo '<br>';echo '<br>';
         //   echo('Arreglo: $movi_corte_ord');echo '<br>';
-          // print_r($movi_corte); // --> se imprime la variable en crudo
-          //print_r($movi_corte_ord);
+        //   //print_r($movi_corte); // --> se imprime la variable en crudo
+        //   //print_r($movi_corte_ord);
 
         //   echo str_pad('id',12,'_').' '.str_pad('idinquilino',12,'_').' '.str_pad('usuario',12,'_').' '.str_pad('pax',12,'_').' '.str_pad('idpiso',12,'_').' '.str_pad('ocupado',12,'_').' '.str_pad('fecha',12,'_').' '.str_pad('Lectura Cont',12,'_').' '.str_pad('entrada',12,'_').' Descuento';
         //   echo '<br>';
@@ -404,7 +406,7 @@ class Facturas extends CI_Controller {
         //     echo 'Periodo: '.$linea['fdes'].' / '.$linea['fhas'].' - Lectura: '.$linea['lant'].' .. '.$linea['lact'];
         //     echo '<br>';
         //  }
-         //echo '<br>'; print_r($moviArray);
+        //  echo '<br>'; print_r($moviArray);
 
         // Ahora creamos arreglo con los periodos de cada usuario, arreglo $periodoUsuario (periodo usuario)
         // O sea los periodos o tiempo que el usuario a estado en el piso con respecto al periodo de la factura
@@ -594,6 +596,8 @@ class Facturas extends CI_Controller {
         //     echo '<br>';
         //     echo 'Total importe: '.sumar_column($usr,'impusr');
         //     echo '<br>';
+        //     echo 'Total consumo: '.sumar_column($usr,'contador');
+        //     echo '<br>';
         // }
     
     
@@ -622,12 +626,13 @@ class Facturas extends CI_Controller {
         foreach ($usr_group as $index => $usr){
             foreach ($usr as $linea){
                 $usuvista[$index]= array(
-                    'fdes'      => $linea['fdes'],              // Fecha inicio periodo
-                    'fhas'      => $linea['fhas'],              // Fecha final periodo
-                    'pax'       => $linea['paxusr'],            // Pax
-                    'idinqui'   => $linea['idinqui'],           // ID de usuario
-                    'descuento' => $linea['descuento'],         // Descuento
-                    'importe'   => sumar_column($usr,'impusr'), // Importe a pagar
+                    'fdes'      => $linea['fdes'],                // Fecha inicio periodo
+                    'fhas'      => $linea['fhas'],                // Fecha final periodo
+                    'pax'       => $linea['paxusr'],              // Pax
+                    'idinqui'   => $linea['idinqui'],             // ID de usuario
+                    'descuento' => $linea['descuento'],           // Descuento
+                    'importe'   => sumar_column($usr,'impusr'),   // Importe a pagar
+                    'conusr'    => sumar_column($usr,'contador'), // Consumo del contador segun periodo del usuario
                 );
             }
         }
@@ -686,6 +691,7 @@ class Facturas extends CI_Controller {
             $data[0]['idfactura']   = $factura->id;
             $data[0]['confac']      = $factura->lact - $factura->lant;
             $data[0]['preuni']      = $factura->importe / ($factura->lact - $factura->lant);
+            $data[0]['conusr']      = $factura->lact - $factura->lant;
         }
         return $data;
 

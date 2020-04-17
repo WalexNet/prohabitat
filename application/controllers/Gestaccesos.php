@@ -23,6 +23,7 @@ class Gestaccesos extends CI_Controller
     private $datos      = [];
     private $editar     = false;
     private $verFicha   = false;
+    private $buscar     = false;
     private $ficha      = '';
     private $perfil     = '';
 
@@ -53,18 +54,21 @@ class Gestaccesos extends CI_Controller
 		// Inicializamos el paginador
         $this->pagination->initialize($config); 
         // Finalizamos paginador
-
+        // *************************
+        // Configuramos las varibles y/o datos de las vistas
         $data_enc_cuerpo['lugar']   = ($this->editar) ? "Técnicos / Gestion de Accessos / Edición":"Técnicos / Gestion de Accessos";
         $data_enc_cuerpo['uri']     = "Gestaccesos";
 
         $this->datos['editar']      = $this->editar;
-        $this->datos['consulta']    = ($this->verFicha) ? $this->ficha : $this->Tecnicos_model->get_tecnic($offset,$limite);
+        $this->datos['consulta']    = ($this->verFicha) ? $this->ficha : (($this->buscar) ? $this->ficha : $this->Tecnicos_model->get_tecnic($offset,$limite));
         $this->datos['perfil']      = $this->perfil;
 
+        // Cargamos las vistas
         $this->load->view('principal/header');                          // 
         $this->load->view('principal/enca_logo_cuerpo');                // 
         $this->load->view('principal/loginmenu_cuerpo');                // 
         $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // 
+
         if($this->verFicha){
             $this->load->view('cuerpo_editaacceso', $this->datos);
         }else{
@@ -128,6 +132,14 @@ class Gestaccesos extends CI_Controller
     {
         $this->Tecnicos_model->del_perfil($idperfil);
         $this->verFicha($idtecnico);
+    }
+
+    public function buscar()
+    {
+        // Paso la consulta a ficha pero deberia llamarse de otra manera
+        $this->buscar = true;
+        $this->ficha = $this->Tecnicos_model->find_tecnic();
+        $this->index();
     }
 }
 

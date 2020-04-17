@@ -65,11 +65,12 @@
 
                 <?php else: ?> <!-- De lo contrario mostramos usuarios a pagar -->
                     <h2 class="text-white pb-2">Usuarios que deben pagar esta Factura</h2>
+                    <?php $totalpagado = 0; ?>
                     <!-- Pagos Usuarios -->
                     <div class="row row-card-no-pd mt--2">
                         <?php foreach($usuarios as $usr): ?>
                             <?php //extract($usr); ?>
-                            <?php $porcentaje = intval(($usr->importe * 100)/$factura->importe); ?>
+                            <?php $porcentaje = intval(($usr->impusr * 100)/$factura->importe); ?>
 
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="card">
@@ -78,12 +79,23 @@
                                             <div>
                                                 <a href="<?= base_url() ?>Inquilinos/ficha/<?= $usr->idinqui ?>"><h5 class="card-title"><b><?= $usr->nick ?></b></h5></a>
                                             </div>
-                                            <h3 class="text-info fw-bold">&euro;<?= number_format($usr->importe,2) ?></h3>
+                                            <h3 class="text-info fw-bold">&euro;<?= number_format($usr->impusr,2) ?></h3>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted">Periodo: </p>
                                             <p class="text-muted"><?= $usr->fdes.' / '.$usr->fhas ?></p>
                                         </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="text-muted">Consumo Factura <?= $usr->confac ?></p>
+                                        </div>
+                                        <div class="text-white">Consumo Usuario</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: <?= ($usr->conusr*100)/$usr->confac ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?= $usr->confac ?>"></div>
+                                        </div>
+                                        <div d-flex justify-content-between>
+                                            <p class="text-muted"><?= $usr->conusr ?> de <?= $usr->confac ?></p>
+                                        </div>
+
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted">PAX:</p>
                                             <p class="text-muted"><?= $usr->pax ?></p>
@@ -95,18 +107,28 @@
                                             <div class="de-flex justify-content-center">
                                                 <button class="btn btn-success">Pagado</button>
                                             </div> 
+                                            <?php $totalpagado += $usr->impusr; ?>
                                         <?php else: ?>
                                             <div class="de-flex justify-content-center">
                                                 <a href="<?= base_url()?>Pagos/pagar/<?= $usr->idinqui.'/'.$factura->id?> " onclick="return confirmar('Una vez realizado el pago no podrá volver atras\nDesea hacer el pago?')"><button class="btn btn-warning">Pagar</button></a>
                                             </div>   
                                         <?php endif; ?>
-                                        
                                     </div>
                                 </div>
                             </div>
 
                         <?php endforeach; ?>
                     </div>
+                    <h4 class="text-white">Estado Actual de la factura:</h4>
+                    <div class="row">
+                        <div class="col-md-4"><p class="text-left text-info">Total Pagado: <b><?= number_format($totalpagado,2).'€'; ?></b></p></div>
+                        <div class="col-md-4"><p class="text-center text-info">Pendiente de Pagar: <b><?=number_format($factura->importe-$totalpagado,2).'€' ?></b></p></div>
+                        <div class="col-md-4"><p class="text-right text-info">Importe Total: <b><?= number_format($factura->importe,2).'€'; ?></b></p></div>
+                    </div>    
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar" role="progressbar" style="width: <?= ($totalpagado*100)/$factura->importe; ?>%;" aria-valuenow="<?= $totalpagado; ?>" aria-valuemin="0" aria-valuemax="$factura->importe"><?= number_format(($totalpagado*100)/$factura->importe); ?>%</div>
+                    </div>
+                    
                 <?php endif; ?>
 
             </div> <!-- Fin del div del cuerpo principal -->
