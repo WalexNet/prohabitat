@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Facturas extends CI_Controller {
-	public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         // comprobamos session
 		if (!$this->session->login) redirect('Inicio');
@@ -76,7 +77,8 @@ class Facturas extends CI_Controller {
 		$this->index(0,TRUE, $ficha);
 	}
 
-	public function alta(){
+    public function alta()
+    {
         // Añadimos los factura con los datos 
         $this->Factura_model->addfactu();
         
@@ -130,7 +132,7 @@ class Facturas extends CI_Controller {
 
         $data = $this->prepararTablaPagos($movimientos, $factura);
 
-        $this->Factura_model->modificaBatch($data, $factura->id);
+        $this->Factura_model->modificaPagosBatch($data, $factura->id);
 
 		$this->index();
 
@@ -226,48 +228,48 @@ class Facturas extends CI_Controller {
         $datos['preciounitario']    = $preciounitario;
         $datos['idfac']             = $factura->id;
     
-        // Esto es todo a modo de prueba
-        // *************************************************************
-        // imprmimimos de modo prueba
-        //   echo 'Total Inquilinos: '.count($movimientos->result()); echo '<br>';
-        //   echo 'Periodo: '.$factura->fdes.' - '.$factura->fhas; echo '<br>';
-        //   echo 'Lectura: '.$factura->lant.' - '.$factura->lact; echo '<br>';
-        //   echo 'Consumo Factura: '.$consumo_factura; echo '<br>';
-        //   echo 'Servicio: '.$factura->idservicio.' '.$factura->servicio; echo '<br>';
-        //   echo 'Importe: '.$factura->importe; echo '<br>';
-        //   echo 'Precio Unitario: '.number_format($preciounitario,2,",","."); echo '<br>';
-        //   echo '<br>';
-    
-        //   echo "<pre>";
-        //   echo '<br>';echo '<br>';
-        //   echo('Arreglo: $movi_corte_ord');echo '<br>';
-        //   //print_r($movi_corte); // --> se imprime la variable en crudo
-        //   //print_r($movi_corte_ord);
+        /** 
+         * Esto es todo a modo de prueba
+         * ************************** imprmimimos de modo prueba *********************************
+         * 
+            echo 'Total Inquilinos: '.count($movimientos->result()); echo '<br>';
+            echo 'Periodo: '.$factura->fdes.' - '.$factura->fhas; echo '<br>';
+            echo 'Lectura: '.$factura->lant.' - '.$factura->lact; echo '<br>';
+            echo 'Consumo Factura: '.$consumo_factura; echo '<br>';
+            echo 'Servicio: '.$factura->idservicio.' '.$factura->servicio; echo '<br>';
+            echo 'Importe: '.$factura->importe; echo '<br>';
+            echo 'Precio Unitario: '.number_format($preciounitario,2,",","."); echo '<br>';
+            echo '<br>';
 
-        //   echo str_pad('id',12,'_').' '.str_pad('idinquilino',12,'_').' '.str_pad('usuario',12,'_').' '.str_pad('pax',12,'_').' '.str_pad('idpiso',12,'_').' '.str_pad('ocupado',12,'_').' '.str_pad('fecha',12,'_').' '.str_pad('Lectura Cont',12,'_').' '.str_pad('entrada',12,'_').' Descuento';
-        //   echo '<br>';
-        //   foreach ($movi_corte_ord as $linea)
-        //   {
-        //       echo str_pad($linea['id'],12,'_').' '.str_pad($linea['idinquilino'],12,'_').' '.str_pad($linea['usuario'],12,'_').' '.str_pad($linea['pax'],12,'_').' '.str_pad($linea['idpiso'],12,'_').' '.str_pad($linea['ocupado'],12,'_').' '.str_pad($linea['fecha'],12,'_').' '.str_pad($linea['servicio'],12,'*').' '.str_pad($linea['entrada'],12,'_').' '.$linea['descuento'];
-        //       echo '<br>';
-            
-        //   }
-          //print_r($moviArray);echo '<br>';
-        // *************************************************************
+            echo "<pre>";
+            echo '<br>';echo '<br>';
+            echo('Arreglo: $movi_corte_ord');echo '<br>';
+            //print_r($movi_corte); // --> se imprime la variable en crudo
+            //print_r($movi_corte_ord);
 
+            echo str_pad('id',12,'_').' '.str_pad('idinquilino',12,'_').' '.str_pad('usuario',12,'_').' '.str_pad('pax',12,'_').' '.str_pad('idpiso',12,'_').' '.str_pad('ocupado',12,'_').' '.str_pad('fecha',12,'_').' '.str_pad('Lectura Cont',12,'_').' '.str_pad('entrada',12,'_').' Descuento';
+            echo '<br>';
+            foreach ($movi_corte_ord as $linea)
+            {
+                echo str_pad($linea['id'],12,'_').' '.str_pad($linea['idinquilino'],12,'_').' '.str_pad($linea['usuario'],12,'_').' '.str_pad($linea['pax'],12,'_').' '.str_pad($linea['idpiso'],12,'_').' '.str_pad($linea['ocupado'],12,'_').' '.str_pad($linea['fecha'],12,'_').' '.str_pad($linea['servicio'],12,'*').' '.str_pad($linea['entrada'],12,'_').' '.$linea['descuento'];
+                echo '<br>';
             
-        // *********************************************************************************
-        // * SI FECHA DE ENTRADA DEL USUARIO ES MAYOR QUE FDES FACTURA                     *
-        // *                                                                               *
-        // * DEBERIA PAGAR EL ADMINISTRADOR                                                *
-        // *                                                                               *
-        // * DE IGUAL MANERA QUE SI ULTIMA FECHA DE SALIDA ES MENOR QUE FHAS DE FACTURA    *
-        // *                                                                               *
-        // * TAMBIEN DEBERIA PAGAR EL ADMINISTRADOR                                        *
-        // *********************************************************************************
-         
+            }
+            print_r($moviArray);echo '<br>';
+        */
+        /**
+            *********************************************************************************
+            * SI FECHA DE ENTRADA DEL USUARIO ES MAYOR QUE FDES FACTURA                     *
+            *                                                                               *
+            * DEBERIA PAGAR EL ADMINISTRADOR                                                *
+            *                                                                               *
+            * DE IGUAL MANERA QUE SI ULTIMA FECHA DE SALIDA ES MENOR QUE FHAS DE FACTURA    *
+            *                                                                               *
+            * TAMBIEN DEBERIA PAGAR EL ADMINISTRADOR                                        *
+            *********************************************************************************
+        */ 
         // echo('Arreglo: $temp');echo '<br>';
-
+        //
         $temp = array();
         // Si el Usuario entro despues del inicio de pago de la factura (FechaEntrada > Factura.Fdes)
         if($factura->fdes < $movi_corte_ord[0]['fecha']){
@@ -320,14 +322,15 @@ class Facturas extends CI_Controller {
             array_unshift($moviArray, $temp); 
         }
        
-        // Preparamos matriz $fper (fecha de periodos)
-        // Para que quede de la siguiente manera: Preparamos fechas y lectura de contadores
-        // Pedro_____ 2019-09-13 - 150
-        // Rosario___ 2019-09-13 - 150
-        // Alina_____ 2019-09-13 - 150
-        // Halima____ 2019-10-22 - 165
-        // Rosario___ 2019-11-02 - 190
-    
+        /** Preparamos matriz $fper (fecha de periodos)
+         *  Para que quede de la siguiente manera: Preparamos fechas y lectura de contadores
+         * 
+            Pedro_____ 2019-09-13 - 150
+            Rosario___ 2019-09-13 - 150
+            Alina_____ 2019-09-13 - 150
+            Halima____ 2019-10-22 - 165
+            Rosario___ 2019-11-02 - 190
+        */
         $x = 0;
         foreach ($movi_corte_ord as $linea)
         {
@@ -349,18 +352,19 @@ class Facturas extends CI_Controller {
             $fper[$x]['descuento']   = $linea['descuento'];
             $x++;
         }
-    
-        // Mostramos
-        //  echo '<br>';
-        //  echo 'Matriz: $fper';echo '<br>';
-        //  //print_r($fper);
-        //  foreach ($fper as $linea)
-        //  {
-        //      echo str_pad($linea['usr'],10,'_').' '.$linea['fecha'].' - '.$linea['lec_con'];
-        //      echo '<br>';
-        //  }
-        //  echo '<br>';
-
+   
+        /** // Mostramos
+         * 
+            echo '<br>';
+            echo 'Matriz: $fper';echo '<br>';
+            //print_r($fper);
+            foreach ($fper as $linea)
+            {
+                echo str_pad($linea['usr'],10,'_').' '.$linea['fecha'].' - '.$linea['lec_con'];
+                echo '<br>';
+            }
+            echo '<br>';
+        */
         // Una ves creada esa matriz, generamos los periodos de "corte" del periodo a facturar Matriz $periodos
         $nper = 0;
         $fechaux = $factura->fdes;
@@ -391,30 +395,34 @@ class Facturas extends CI_Controller {
         $periodos[$nper]['fhas'] = $factura->fhas;
         $periodos[$nper]['lact'] = $factura->lact; //*
 
-        // Ejemplo de como queda $periodos
-        // 2019-09-13 - 2019-10-22 Lectura: 150 .. 165
-        // 2019-10-22 - 2019-11-02 Lectura: 165 .. 190
-        // 2019-11-02 - 2019-12-12 Lectura: 190 .. 225
-
-        // Mostramos
-        //  echo '<br>';echo '<br>';
-        //  echo 'Matriz: $periodos';
-        //  echo '<br>';
-        //  //echo '<br>'; print_r($periodos);
-        //  foreach ($periodos as $linea)
-        //  {
-        //     echo 'Periodo: '.$linea['fdes'].' / '.$linea['fhas'].' - Lectura: '.$linea['lant'].' .. '.$linea['lact'];
-        //     echo '<br>';
-        //  }
-        //  echo '<br>'; print_r($moviArray);
-
-        // Ahora creamos arreglo con los periodos de cada usuario, arreglo $periodoUsuario (periodo usuario)
-        // O sea los periodos o tiempo que el usuario a estado en el piso con respecto al periodo de la factura
-        // Ejemplo de los periodos por Usuario:
-        // Periodo: 2019-09-05 / 2019-09-10 - Lectura: 241235 .. 241240
-        // Periodo: 2019-09-10 / 2019-10-22 - Lectura: 241240 .. 241245
-        // Periodo: 2019-10-22 / 2019-11-02 - Lectura: 241245 .. 241265
-        // Periodo: 2019-11-02 / 2019-11-04 - Lectura: 241265 .. 241300
+        /** Ejemplo de como queda $periodos
+         * 
+            2019-09-13 - 2019-10-22 Lectura: 150 .. 165
+            2019-10-22 - 2019-11-02 Lectura: 165 .. 190
+            2019-11-02 - 2019-12-12 Lectura: 190 .. 225
+        */
+        /** // Mostramos
+         * 
+            echo '<br>';echo '<br>';
+            echo 'Matriz: $periodos';
+            echo '<br>';
+            //echo '<br>'; print_r($periodos);
+            foreach ($periodos as $linea)
+            {
+            echo 'Periodo: '.$linea['fdes'].' / '.$linea['fhas'].' - Lectura: '.$linea['lant'].' .. '.$linea['lact'];
+            echo '<br>';
+            }
+            echo '<br>'; print_r($moviArray);
+        */
+        /** Ahora creamos arreglo con los periodos de cada usuario, arreglo $periodoUsuario (periodo usuario)
+         *   O sea los periodos o tiempo que el usuario a estado en el piso con respecto al periodo de la factura
+         * Ejemplo de los periodos por Usuario:
+         * 
+            Periodo: 2019-09-05 / 2019-09-10 - Lectura: 241235 .. 241240
+            Periodo: 2019-09-10 / 2019-10-22 - Lectura: 241240 .. 241245
+            Periodo: 2019-10-22 / 2019-11-02 - Lectura: 241245 .. 241265
+            Periodo: 2019-11-02 / 2019-11-04 - Lectura: 241265 .. 241300
+        */
         $x = 0;
         foreach ($moviArray as $linea){
             if ($linea['fechaE'] <= $factura->fdes){
@@ -447,18 +455,18 @@ class Facturas extends CI_Controller {
             $periodoUsuario[$x]['descuento']    = 0.00;
         }
         
-        // Mostramos
-        // echo '<br>';
-        // echo '<br>';
-        // echo 'Matriz: $periodoUsuario';
-        // //echo '<br>'; print_r($periodoUsuario);
-        // foreach ($periodoUsuario as $linea)
-        // {
-        //     echo '<br>';
-        //     echo 'Periodo: '.$linea['fechaE'].' / '.$linea['fechaS'].' - Usuario: '.str_pad($linea['id'],2,' ').' - '.str_pad($linea['usu'],10,'_').' PAX: '.$linea['pax'];
-        // }
-        // echo '<br>';
-
+        /** // Mostramos
+            echo '<br>';
+            echo '<br>';
+            echo 'Matriz: $periodoUsuario';
+            //echo '<br>'; print_r($periodoUsuario);
+            foreach ($periodoUsuario as $linea)
+            {
+                echo '<br>';
+                echo 'Periodo: '.$linea['fechaE'].' / '.$linea['fechaS'].' - Usuario: '.str_pad($linea['id'],2,' ').' - '.str_pad($linea['usu'],10,'_').' PAX: '.$linea['pax'];
+            }
+            echo '<br>';
+        */
         // Si en el preiodo de la factura, el ultimo usuiario la fecha de salida es antes de la fecha final del periodo
         // Añadimos al administrador en ese periodo vacio 
         if(end($periodoUsuario)['fechaS']<$factura->fhas){
@@ -481,15 +489,18 @@ class Facturas extends CI_Controller {
             array_unshift($moviArray, $temp); 
         }
     
-        // Verificamos a que periodos pertenece cada usuario con la funcion
-        // private function en_rango($fechaeva, $fechaini, $fechafin)
-        // y añadimos a en cada periodo a los usuarios correspondientes
-        // Creamos arreglo final $usuariosPorPeriodo
-        // 
-        // Periodo1: User ID: 10 Pedro Pax:1.0 ID: 7 Rosario Pax:1.0 ID: 9 Alina Pax:1.0
-        // Periodo2: User ID: 10 Pedro Pax:1.0 ID: 7 Rosario Pax:1.0 ID: 8 Halima Pax:1.0 ID: 9 Alina Pax:1.0
-        // Periodo3: User ID: 10 Pedro Pax:1.0 ID: 8 Halima Pax:1.0 ID: 9 Alina Pax:1.0
-        //        
+        /**
+         * Verificamos a que periodos pertenece cada usuario con la funcion
+         * private function en_rango($fechaeva, $fechaini, $fechafin)
+         * y añadimos a en cada periodo a los usuarios correspondientes
+         * 
+         * Creamos arreglo final $usuariosPorPeriodo
+         * 
+         * Periodo1: User ID: 10 Pedro Pax:1.0 ID: 7 Rosario Pax:1.0 ID: 9 Alina Pax:1.0
+         * Periodo2: User ID: 10 Pedro Pax:1.0 ID: 7 Rosario Pax:1.0 ID: 8 Halima Pax:1.0 ID: 9 Alina Pax:1.0
+         * Periodo3: User ID: 10 Pedro Pax:1.0 ID: 8 Halima Pax:1.0 ID: 9 Alina Pax:1.0
+         */
+
         $PAX_per = 0;
         foreach ($periodos as $index => $per)
         {
@@ -527,21 +538,20 @@ class Facturas extends CI_Controller {
             $PAX_per = 0;
             $usuario = null;
         }
-    
-        // Mostramos
-        // echo '<br>';
-        // echo '<br>';
-        // echo 'Matriz: $usuariosPorPeriodo';
-        // foreach ($usuariosPorPeriodo as $index => $linea)
-        // {
-        //     echo '<br>';
-        //     echo 'Periodo: '.$linea['fdes'].' / '.$linea['fhas'].' Lectura Con: '.$linea['lant'].'-'.$linea['lact'].' = '.$linea['cons'].' PAX:'.$linea['paxper'].' Importe: '.number_format($linea['impcons'],2,",",".").' User';
-        //     foreach ($linea['usu'] as $user)
-        //     {
-        //         echo ' ID: '.$user['id'].' '.$user['usu'].' Pax:'.$user['pax'];
-        //     }
-        // }
-
+        /** // Mostramos Variables
+            echo '<br>';
+            echo '<br>';
+            echo 'Matriz: $usuariosPorPeriodo';
+            foreach ($usuariosPorPeriodo as $index => $linea)
+            {
+                echo '<br>';
+                echo 'Periodo: '.$linea['fdes'].' / '.$linea['fhas'].' Lectura Con: '.$linea['lant'].'-'.$linea['lact'].' = '.$linea['cons'].' PAX:'.$linea['paxper'].' Importe: '.number_format($linea['impcons'],2,",",".").' User';
+                foreach ($linea['usu'] as $user)
+                {
+                    echo ' ID: '.$user['id'].' '.$user['usu'].' Pax:'.$user['pax'];
+                }
+            }
+        */
         foreach ($usuariosPorPeriodo as $index => $linea)
         {
             foreach ($linea['usu'] as $user)
@@ -563,64 +573,63 @@ class Facturas extends CI_Controller {
             }
         }
     
-        // Mostramos
-        // print_r($usuario);
-        // echo '<br>';
-        // echo '<br>';
-        // echo 'Matriz: $usuario'; echo '<br>';
-        // echo str_pad('Periodo',8,'_').' '.str_pad('Inicio',10,'_').'/'.str_pad('Fin',10,'_').' '.str_pad('Contador',8,'_').' '.str_pad('PAX Per',8,'_').' '.str_pad('IMP Per',8,'_').' '.str_pad('ID',4,'_').' '.str_pad('Nick',12,'_').' '.str_pad('PAX USR',8,'_').' '.str_pad('IMP USR',8,'_');
-    
-        // foreach ($usuario as $linea)
-        // {
-        //     echo '<br>';
-        //     echo str_pad($linea['per'],8,'_').' '.str_pad($linea['fdes'],10,'_').'/'.str_pad($linea['fhas'],10,'_').' '.str_pad($linea['contador'],8,'_').' '.str_pad($linea['paxper'],8,'_').' '.str_pad(number_format($linea['impper'],2),8,'_').' '.str_pad($linea['idinqui'],4,'_').' '.str_pad($linea['nick'],12,'_').' '.str_pad($linea['paxusr'],8,'_').' '.number_format($linea['impusr'],2);
-        // }
-    
+        /** // Mostramos Variables
+            print_r($usuario);
+            echo '<br>';
+            echo '<br>';
+            echo 'Matriz: $usuario'; echo '<br>';
+            echo str_pad('Periodo',8,'_').' '.str_pad('Inicio',10,'_').'/'.str_pad('Fin',10,'_').' '.str_pad('Contador',8,'_').' '.str_pad('PAX Per',8,'_').' '.str_pad('IMP Per',8,'_').' '.str_pad('ID',4,'_').' '.str_pad('Nick',12,'_').' '.str_pad('PAX USR',8,'_').' '.str_pad('IMP USR',8,'_');
+        
+            foreach ($usuario as $linea)
+            {
+                echo '<br>';
+                echo str_pad($linea['per'],8,'_').' '.str_pad($linea['fdes'],10,'_').'/'.str_pad($linea['fhas'],10,'_').' '.str_pad($linea['contador'],8,'_').' '.str_pad($linea['paxper'],8,'_').' '.str_pad(number_format($linea['impper'],2),8,'_').' '.str_pad($linea['idinqui'],4,'_').' '.str_pad($linea['nick'],12,'_').' '.str_pad($linea['paxusr'],8,'_').' '.number_format($linea['impusr'],2);
+            }
+        */
         // Agrupamos tabla por columna nick
         $usr_group = group_by('idinqui',$usuario);
         
-        // Mostramos
-        // echo '<br>';echo '<br>';echo '<br>';
-        // echo 'Matriz $usr_group Usuarios:'.count($usr_group).' Agrupados por usuario y total que deberia pagar';
-        //print_r($usr_group);
-    
-        // foreach ($usr_group as $index => $usr)
-        // {
-        //     echo '<br>';
-        //     echo 'Usuario: '.$index;
-        //     foreach ($usr as $linea)
-        //     {
-        //         echo '<br>';
-        //         echo str_pad($linea['per'],8,'_').' '.str_pad($linea['fdes'],10,'_').'/'.str_pad($linea['fhas'],10,'_').' '.str_pad($linea['contador'],8,'_').' '.str_pad($linea['paxper'],8,'_').' '.str_pad(number_format($linea['impper'],2),8,'_').' '.str_pad($linea['idinqui'],4,'_').' '.str_pad($linea['nick'],12,'_').' '.str_pad($linea['paxusr'],8,'_').' '.number_format($linea['impusr'],2);
-        //     }
-        //     echo '<br>';
-        //     echo 'Total importe: '.sumar_column($usr,'impusr');
-        //     echo '<br>';
-        //     echo 'Total consumo: '.sumar_column($usr,'contador');
-        //     echo '<br>';
-        // }
-    
-    
-        // Resultado de la tabla agrupada por usuario y periodo:
-        //
-        // PER      fdes        fhas        CONTADOR    PAXPER  IMPPER  idinqui   NICK       PAXUSR    IMPUSR
-        // Usuario: Pedro
-        // 0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  10__    Pedro____  1.0____   6.67
-        // 1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  10__    Pedro____  1.0____   8.33
-        // 2_______ 2019-11-02  2019-12-12  35______    3_____  46.67_  10__    Pedro____  1.0____   15.56
-        // Total importe: 30.555555555556 
-        //
-        // Usuario: Rosario
-        // 0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  7___    Rosario__  1.0____   6.67
-        // 1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  7___    Rosario__  1.0____   8.33
-        // Total importe: 15
-        //
-        // Usuario: Alina
-        // 0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  9___    Alina____  1.0____   6.67
-        // 1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  9___    Alina____  1.0____   8.33
-        // 2_______ 2019-11-02  2019-12-12  35______    3_____  46.67_  9___    Alina____  1.0____   15.56
-        // Total importe: 30.555555555556
+        /** // Mostramos Variables
+            echo '<br>';echo '<br>';echo '<br>';
+            echo 'Matriz $usr_group Usuarios:'.count($usr_group).' Agrupados por usuario y total que deberia pagar';
+            print_r($usr_group);
         
+            foreach ($usr_group as $index => $usr)
+            {
+                echo '<br>';
+                echo 'Usuario: '.$index;
+                foreach ($usr as $linea)
+                {
+                    echo '<br>';
+                    echo str_pad($linea['per'],8,'_').' '.str_pad($linea['fdes'],10,'_').'/'.str_pad($linea['fhas'],10,'_').' '.str_pad($linea['contador'],8,'_').' '.str_pad($linea['paxper'],8,'_').' '.str_pad(number_format($linea['impper'],2),8,'_').' '.str_pad($linea['idinqui'],4,'_').' '.str_pad($linea['nick'],12,'_').' '.str_pad($linea['paxusr'],8,'_').' '.number_format($linea['impusr'],2);
+                }
+                echo '<br>';
+                echo 'Total importe: '.sumar_column($usr,'impusr');
+                echo '<br>';
+                echo 'Total consumo: '.sumar_column($usr,'contador');
+                echo '<br>';
+            }
+        */
+        /** Resultado de la tabla agrupada por usuario y periodo:
+        
+            PER      fdes        fhas        CONTADOR    PAXPER  IMPPER  idinqui   NICK       PAXUSR    IMPUSR
+            Usuario: Pedro
+            0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  10__    Pedro____  1.0____   6.67
+            1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  10__    Pedro____  1.0____   8.33
+            2_______ 2019-11-02  2019-12-12  35______    3_____  46.67_  10__    Pedro____  1.0____   15.56
+            Total importe: 30.555555555556 
+            
+            Usuario: Rosario
+            0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  7___    Rosario__  1.0____   6.67
+            1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  7___    Rosario__  1.0____   8.33
+            Total importe: 15
+            
+            Usuario: Alina
+            0_______ 2019-09-13  2019-10-22  15______    3_____  20.00_  9___    Alina____  1.0____   6.67
+            1_______ 2019-10-22  2019-11-02  25______    4_____  33.33_  9___    Alina____  1.0____   8.33
+            2_______ 2019-11-02  2019-12-12  35______    3_____  46.67_  9___    Alina____  1.0____   15.56
+            Total importe: 30.555555555556
+        */
     
         // Creamos $usuvista, arreglo con los datos del usuario (compactado, resumido) para la vista
         foreach ($usr_group as $index => $usr){
@@ -636,13 +645,12 @@ class Facturas extends CI_Controller {
                 );
             }
         }
-    
-        // mostramos
-        // foreach ($usuvista as $linea){
-        //     echo '<br>';
-        //     echo $linea['fdes'].'  '.$linea['fhas'].'  '.$linea['idinqui'].' - '.$linea['descuento'].' '.$linea['importe'];
-        // }
-        
+        /** // Mostramos Arreglos
+            // foreach ($usuvista as $linea){
+            //     echo '<br>';
+            //     echo $linea['fdes'].'  '.$linea['fhas'].'  '.$linea['idinqui'].' - '.$linea['descuento'].' '.$linea['importe'];
+            // }
+        */
     
         $datos['usuarios'] = $usuvista;
     

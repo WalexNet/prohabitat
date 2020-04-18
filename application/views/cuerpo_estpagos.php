@@ -9,29 +9,41 @@
                         <div class="card ">
                             <div class="card-body">
                                 <div class="d-flex">
-                                        
-                                    <div class="col-md-6">
+                                            
+                                    <div class="col-md-4"> <!-- Nro LecAnt Imp -->
                                         <div class="info-post">
                                             <label>N&uacute;mero</label>
                                             <p ><?= $factura->numero ?></p>
-                                            <label>Periodo</label>
-                                            <p><?= $factura->periodo ?></p>
-                                            <label>Importe</label>
-                                            <p><?= $factura->importe ?>&euro;</p>
                                             <label>Lectura Anterior</label>
                                             <p><?= $factura->lant ?></p>
+                                            <label>Importe</label>
+                                            <p><?= $factura->importe ?>&euro;</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-4"> <!-- FFact LecAct Serv -->
                                         <div class="info-post">
                                             <label>Fecha Facturaci&oacute;n</label>
                                             <p><?= $factura->fechaf ?></p>
-                                            <label>Desde/Hasta</label>
-                                            <p><?= $factura->fdes ?> / <?= $factura->fhas ?></p>
-                                            <label>Servicio</label>
-                                            <p><?= $factura->servicio ?></p>
                                             <label>Lectura Actual</label>
                                             <p><?= $factura->lact ?></p>
+
+                                            <label>Servicio</label>
+                                            <p><?= $factura->servicio ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4"> <!-- Periodo Fdes/Fhas -->
+                                        <div class="info-post">
+                                            <label>Periodo</label>
+                                            <p><?= $factura->periodo ?></p>
+
+                                            <label>Desde/Hasta</label>
+                                            <p><?= $factura->fdes ?> / <?= $factura->fhas ?></p>
+
+                                            <label>Documento</label>
+                                            <p><?= $factura->facdoc ?></p>
+
                                         </div>
                                     </div>
 
@@ -91,7 +103,7 @@
 
                                         <div class="text-white">Consumo Usuario</div> <!-- Consumo Usr y Barra-->
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: <?= ($usr->conusr*100)/$usr->confac ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?= $usr->confac ?>"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: <?= ($usr->conusr*100)/$usr->confac.'%' ?>" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?= $usr->confac ?>"></div>
                                         </div>
                                         <div d-flex justify-content-between>
                                             <p class="text-muted"><?= $usr->conusr ?> de <?= $usr->confac ?></p>
@@ -130,7 +142,7 @@
                         <div class="col-md-4"><p class="text-right text-info">Importe Total: <b><?= number_format($factura->importe,2).'€'; ?></b></p></div>
                     </div>    
                     <div class="progress" style="height: 25px;">
-                        <div class="progress-bar" role="progressbar" style="width:<?=($totalpagado*100)/$factura->importe;?>%" aria-valuenow="<?= $totalpagado; ?>" aria-valuemin="0" aria-valuemax="$factura->importe"><?= number_format(($totalpagado*100)/$factura->importe); ?>%</div>
+                        <div class="progress-bar" role="progressbar" style="width:<?=($totalpagado*100)/$factura->importe.'%';?>" aria-valuenow="<?= $totalpagado; ?>" aria-valuemin="0" aria-valuemax="$factura->importe"><?= number_format(($totalpagado*100)/$factura->importe); ?>%</div>
                     </div>
                     
                 <?php endif; ?>

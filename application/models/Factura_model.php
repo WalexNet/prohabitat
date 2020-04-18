@@ -115,7 +115,7 @@ class Factura_model extends CI_Model
         $this->db->insert_batch('recpagos', $registros);
     }
 
-    public function modificaBatch($data, $idfactura)
+    public function modificaPagosBatch($data, $idfactura)
     {
         foreach ($data as $fila) {
             $this->db->update('recpagos', $fila, "idfactura = $idfactura");

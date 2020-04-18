@@ -40,7 +40,7 @@ class Pruebas extends CI_Controller
         $config['max_size']         = 2000;                     // Max Tamaño en Kb
         //$config['max_width']        = 1024;                   // Max ancho en px
         //$config['max_height']       = 768;                    // Max Alto en px
-        $config['file_name']        = date('YMD-His') . 'img';    // El nombre que le pondremos
+        $config['file_name']        = date('YMD-His') . 'img';  // El nombre que le pondremos
 
         $this->load->library('upload', $config);                // Cargamos la libreria y le pasamos la configuración
         echo ('<pre>');
@@ -48,8 +48,9 @@ class Pruebas extends CI_Controller
          * El metodo do_upload se encarga de copiar el archivo al lugar deseado
          * con el nombre deseado y devuelve true si tuvo exito
          */
+        //print_r($_POST['archivoWal']); echo '<br>';
         if (!$this->upload->do_upload($archivo)) {
-            echo $this->upload->display_errors();               // Si hubo error, mostramos el mensaje
+            echo 'Error: '.$this->upload->display_errors();     // Si hubo error, mostramos el mensaje
         } else {
             print_r($this->upload->data());                     // Si todo Ok simplemente mostramos el resultado
         }

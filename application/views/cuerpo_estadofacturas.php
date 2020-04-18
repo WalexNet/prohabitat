@@ -8,10 +8,10 @@
                             <div class="col-md-6">
                                 <h3 class="card-title">Facturas pendientes de pago</h3>
                             </div>
-                            <div class="col-sm-6"> <!-- Formulario de busqueda -->
+                            <div class="col-sm-6"> <!-- Formulario de Filtrado -->
                                 <form role="form" action="<?= base_url('Estadofacturas')?>" method="POST"> <!-- Formulario --> 
                                     <div class="input-group input-group-sm hidden-xs" >
-                                        <input type="text" name="anio" class="form-control" placeholder="Buscar por año Ej: 2020 (YYYY)">
+                                        <input type="text" name="anio" class="form-control" placeholder="Filtrar por año Ej: 2020 (YYYY)">
 
                                         <div class="input-group-btn">
                                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -55,7 +55,7 @@
                                             <td class="text-danger"> 
                                                 <?= $registro->imppte; ?>€
                                                 <div class="progress">
-                                                   <div class="progress-bar bg-danger" role="progressbar" style="width: <?= ($registro->imppte*100)/$registro->impfac; ?>%" aria-valuenow="<?= $registro->imppte; ?>" aria-valuemin="0" aria-valuemax="<?= $registro->impfac; ?>"></div>
+                                                   <div class="progress-bar bg-danger" role="progressbar" style="width: <?= ($registro->imppte*100)/$registro->impfac.'%'; ?>" aria-valuenow="<?= $registro->imppte; ?>" aria-valuemin="0" aria-valuemax="<?= $registro->impfac; ?>"></div>
                                                 </div>
                                             </td>
                                             <td class="text-warning"><?= $registro->impfac; ?>€</td>

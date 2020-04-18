@@ -17,7 +17,7 @@ class Estadofacturas extends CI_Controller {
 	public function index()
 	{
 		// Inicializamos todos los datos para mostrar en la vista
-		$anio = $this->input->post('anio', true);
+		$anio 							= $this->input->post('anio', true);
 		$this->data['facturasptes'] 	= $this->Factura_model->fac_ptes($anio); 
 		$this->data['totalptes']		= count($this->data['facturasptes']);
 
@@ -33,7 +33,7 @@ class Estadofacturas extends CI_Controller {
 		$this->load->view('principal/enca_logo_cuerpo'); 				// Obligado
 		$this->load->view('principal/loginmenu_cuerpo'); 				// Obligado
 		$this->load->view('principal/enca_cuerpo',$data_enc_cuerpo);	// Obligado
-        $this->load->view('cuerpo_estadofacturas', $this->data); 							// Segun corresponda
+        $this->load->view('cuerpo_estadofacturas', $this->data); 		// Segun corresponda
         $this->load->view('principal/pie_cuerpo'); 						// Obligado
 		$this->load->view('principal/foot'); 				
 	}

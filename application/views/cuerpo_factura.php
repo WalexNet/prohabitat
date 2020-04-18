@@ -1,14 +1,6 @@
-
-
-
-
-                   
         <div class="page-category"> <!-- Dentro de este DIV es donde ponemos los componentes o sea, nuestro cuerpo de accion -->
             
             <div class="container-fluid">
-
-
-
 
                 <!-- Tarjeta Datos Factura-->
                 <?php if ($ficha): ?>
@@ -18,31 +10,42 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                             
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="info-post">
                                                 <label>N&uacute;mero</label>
                                                 <p ><?= $datos_ficha->numero ?></p>
-                                                <label>Periodo</label>
-                                                <p><?= $datos_ficha->periodo ?></p>
-                                                <label>Importe</label>
-                                                <p><?= $datos_ficha->importe ?>&euro;</p>
                                                 <label>Lectura Anterior</label>
                                                 <p><?= $datos_ficha->lant ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="info-post">
-                                                <label>Fecha Facturaci&oacute;n</label>
-                                                <p><?= $datos_ficha->fechaf ?></p>
-                                                <label>Desde/Hasta</label>
-                                                <p><?= $datos_ficha->fdes ?> / <?= $datos_ficha->fhas ?></p>
-                                                <label>Servicio</label>
-                                                <p><?= $datos_ficha->servicio ?></p>
-                                                <label>Lectura Actual</label>
-                                                <p><?= $datos_ficha->lact ?></p>
+                                                <label>Importe</label>
+                                                <p><?= $datos_ficha->importe ?>&euro;</p>
                                             </div>
                                         </div>
 
+                                        <div class="col-md-4">
+                                            <div class="info-post">
+                                                <label>Fecha Facturaci&oacute;n</label>
+                                                <p><?= $datos_ficha->fechaf ?></p>
+                                                <label>Lectura Actual</label>
+                                                <p><?= $datos_ficha->lact ?></p>
+                                                <label>Servicio</label>
+                                                <p><?= $datos_ficha->servicio ?></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="info-post">
+                                                <label>Periodo</label>
+                                                <p><?= $datos_ficha->periodo ?></p>
+
+                                                <label>Desde/Hasta</label>
+                                                <p><?= $datos_ficha->fdes ?> / <?= $datos_ficha->fhas ?></p>
+
+                                                <label>Documento</label>
+                                                <p><?= $datos_ficha->facdoc ?></p>
+
+                                            </div>
+                                        </div>
+                                
                                     </div>
                                     <div class="separator-solid"></div>
                                         <div class="row">
@@ -261,9 +264,9 @@
                                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-primary btn-lg" data-original-title="Editar">
                                                                     <a href="<?= base_url()?>Facturas/editar/<?= $registro->id; ?>"><i class="fa fa-edit"></i></a>
                                                                 </button>
-                                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-danger" data-original-title="Eliminar">
-                                                                    <a href="<?= base_url()?>Facturas/baja/<?= $registro->id; ?>"><i class="fa fa-times"></i></a>
-                                                                </button>
+                                                                <!-- <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-danger" data-original-title="Eliminar">
+                                                                    <a href="<?= base_url()?>Facturas/baja/<?= $registro->id; ?>" onclick="return confirmar('Realmente desea Borrar esta Factura?')"><i class="fa fa-times"></i></a>
+                                                                </button> -->
                                                             </div>
                                                         </td>
 
