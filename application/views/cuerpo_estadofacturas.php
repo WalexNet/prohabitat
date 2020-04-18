@@ -8,6 +8,18 @@
                             <div class="col-md-6">
                                 <h3 class="card-title">Facturas pendientes de pago</h3>
                             </div>
+                            <div class="col-sm-6"> <!-- Formulario de busqueda -->
+                                <form role="form" action="<?= base_url('Estadofacturas')?>" method="POST"> <!-- Formulario --> 
+                                    <div class="input-group input-group-sm hidden-xs" >
+                                        <input type="text" name="anio" class="form-control" placeholder="Buscar por año Ej: 2020 (YYYY)">
+
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                     

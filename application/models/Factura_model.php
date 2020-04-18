@@ -131,10 +131,10 @@ class Factura_model extends CI_Model
         return $res->result();
     }
 
-    public function fac_ptes($fdes = null, $fhas = null)
+    public function fac_ptes($anio = null)
     {
-        if(($fdes != null) && ($fhas != null)){
-            $this->db->where("ffactura BETWEEN '$fdes'"." AND", $fhas);
+        if($anio != null){
+            $this->db->where("YEAR(ffactura) =", $anio);
         };
         $res = $this->db->get('fac_ptes');
         return $res->result();
