@@ -27,10 +27,10 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-/tests/tests/
-/tests/results/
-/assets/css/
-/assets/fonts/
-/assets/img/
-/assets/sass/
-/Docus/
+tests/tests/
+tests/results/
+assets/css/
+assets/fonts/
+assets/img/
+assets/sass/
+Docus/

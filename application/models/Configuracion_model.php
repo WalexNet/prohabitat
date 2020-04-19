@@ -44,11 +44,11 @@ class Configuracion_model extends CI_Model
         //Preparamos parametros del archivo a subir
         $archivo = 'archivo';                               // el nombre del imput/file en el form
         $config['upload_path']      = './assets/img/';      // La carpeta donde se guardara
-        $config['allowed_types']    = 'gif|jpg|png|pdf|svg';
+        $config['allowed_types']    = 'gif|jpg|png';
         $config['max_size']         = 2000;                 // Max Tamaño en Kb
         $config['file_name']        = 'walex';              // El nombre que le pondremos
         $this->load->library('upload', $config);            // Cargamos la libreria y le pasamos la configuración
-        //echo ('<pre>');
+        echo ('<pre>');
         /**
          * El metodo do_upload se encarga de copiar el archivo al lugar deseado
          * con el nombre deseado y devuelve true si tuvo exito
@@ -85,6 +85,8 @@ class Configuracion_model extends CI_Model
         // Guardamos la información
         $this->db->update('empresa', $data, ['id' => 1]);
         $this->db->update('inquilinos', $datain, ['id' => 1]);
+
+        print_r($this->upload->data());
         
 
     }
