@@ -57,7 +57,7 @@ class Administrador extends CI_Controller
     public function actualizaDatosEmp()
     {
         $this->Configuracion_model->editEmpresa();
-        //redirect('Inicio');
+        redirect('Inicio');
     }
 }
 

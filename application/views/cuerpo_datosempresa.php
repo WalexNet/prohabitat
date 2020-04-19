@@ -106,7 +106,7 @@
 
                             <div class="form-group"> <!-- Logo -->
                                 <label for="FormControlFile1">Logo de la empresa</label>
-                                <input name="archivo" type="file" class="form-control-file" id="FormControlFile1">
+                                <input name="archivo" type="file" class="form-control-file">
                             </div>
 
                         </div>

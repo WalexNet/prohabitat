@@ -8,7 +8,15 @@ class Factura_model extends CI_Model
     {
         parent::__construct();
         // Your own constructor code
+        //Preparamos parametros del archivo a subir
+        $config['upload_path']      = './Docus/doc/';           // La carpeta donde se guardara
+        $config['allowed_types']    = 'gif|jpg|png|svg|pdf';
+        $config['max_size']         = 4000;                     // Max Tamaño en Kb
+        $config['file_name']        = date('YMd-His') . 'fac';  // El nombre que le pondremos
+        // Cargamos la libreria y le pasamos la configuración
+        $this->load->library('upload', $config);      
     }
+
 
     public function get_factu($offset = FALSE, $limite = FALSE)
     {
@@ -23,21 +31,29 @@ class Factura_model extends CI_Model
 
     public function addfactu()
     {
-        $numero     = strtoupper($this->input->post('numero', true));
-        $fechaf     = $this->input->post('fechaf', true);
-        $importe    = $this->input->post('importe', true);
-        $fdes       = $this->input->post('fdes', true);
-        $fhas       = $this->input->post('fhas', true);
-        $lant       = $this->input->post('lant', true);
-        $lact       = $this->input->post('lact', true);
-        $idservicio = $this->input->post('idservicio', true);
-        $periodo    = $this->input->post('periodo', true);
-        $idpiso     = $this->input->post('idpiso', true);
+        // el nombre del imput/file en el form
+        $archivo = 'archivoFactura';                            
+        /**
+        * El metodo do_upload se encarga de copiar el archivo al lugar deseado
+        * con el nombre deseado y devuelve true si tuvo exito
+        */
+        $subearchivo = $this->upload->do_upload($archivo);
+        $data['numero']     = strtoupper($this->input->post('numero', true));
+        $data['fechaf']     = $this->input->post('fechaf', true);
+        $data['importe']    = $this->input->post('importe', true);
+        $data['fdes']       = $this->input->post('fdes', true);
+        $data['fhas']       = $this->input->post('fhas', true);
+        $data['lant']       = $this->input->post('lant', true);
+        $data['lact']       = $this->input->post('lact', true);
+        $data['idservicio'] = $this->input->post('idservicio', true);
+        $data['periodo']    = $this->input->post('periodo', true);
+        $data['idpiso']     = $this->input->post('idpiso', true);
+        if ($subearchivo) {
+            $data['docu']   = true;
+            $data['facdoc'] = 'Docus/doc/'.$this->upload->data('file_name');
+        }
 
-        $ssql = "INSERT INTO facturas (numero, fechaf, importe, fdes, fhas, lant, lact, idservicio, periodo, idpiso)
-                 VALUES('$numero', '$fechaf', $importe, '$fdes', '$fhas', $lant, $lact, $idservicio, '$periodo', $idpiso)";
-
-        $this->db->query($ssql);
+        return $this->db->insert('facturas', $data);
     }
 
     public function del_factu($id)
@@ -48,32 +64,30 @@ class Factura_model extends CI_Model
 
     public function edit_factu($id)
     {
-        $numero     = strtoupper($this->input->post('numero', true));
-        $fechaf     = $this->input->post('fechaf', true);
-        $importe    = $this->input->post('importe', true);
-        $fdes       = $this->input->post('fdes', true);
-        $fhas       = $this->input->post('fhas', true);
-        $lant       = $this->input->post('lant', true);
-        $lact       = $this->input->post('lact', true);
-        $idservicio = $this->input->post('idservicio', true);
-        $periodo    = $this->input->post('periodo', true);
-        $idpiso     = $this->input->post('idpiso', true);
+        // el nombre del imput/file en el form
+        $archivo = 'archivoFactura';                            
+        /**
+        * El metodo do_upload se encarga de copiar el archivo al lugar deseado
+        * con el nombre deseado y devuelve true si tuvo exito
+        */
+        $subearchivo = $this->upload->do_upload($archivo);
 
-        $ssql = "UPDATE facturas
-                 SET numero     = '$numero',
-                     fechaf     = '$fechaf',
-                     importe    = $importe,
-                     fdes       = '$fdes',
-                     fhas       = '$fhas',
-                     lant       = '$lant',
-                     lact       = '$lact',
-                     idservicio = $idservicio,
-                     periodo    = '$periodo',
-                     idpiso     = $idpiso
-                 WHERE id = $id
-                ";
+        $data['numero']     = strtoupper($this->input->post('numero', true));
+        $data['fechaf']     = $this->input->post('fechaf', true);
+        $data['importe']    = $this->input->post('importe', true);
+        $data['fdes']       = $this->input->post('fdes', true);
+        $data['fhas']       = $this->input->post('fhas', true);
+        $data['lant']       = $this->input->post('lant', true);
+        $data['lact']       = $this->input->post('lact', true);
+        $data['idservicio'] = $this->input->post('idservicio', true);
+        $data['periodo']    = $this->input->post('periodo', true);
+        $data['idpiso']     = $this->input->post('idpiso', true);
+        if ($subearchivo) {
+            $data['docu']   = true;
+            $data['facdoc'] = 'Docus/doc/'.$this->upload->data('file_name');
+        }
 
-        return $this->db->query($ssql);
+        return $this->db->update('facturas', $data, "id = $id");
     }
 
     public function total_factu()

@@ -10,7 +10,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                             
-                                        <div class="col-md-4">
+                                        <div class="col-md-4"> <!-- Nro - Lecant - Importe -->
                                             <div class="info-post">
                                                 <label>N&uacute;mero</label>
                                                 <p ><?= $datos_ficha->numero ?></p>
@@ -22,7 +22,7 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <div class="info-post">
+                                            <div class="info-post"> <!-- FFecha - Lecact - Servicio -->
                                                 <label>Fecha Facturaci&oacute;n</label>
                                                 <p><?= $datos_ficha->fechaf ?></p>
                                                 <label>Lectura Actual</label>
@@ -32,7 +32,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-4"> <!-- Periodo - Fdes-Fhas - Facdoc -->
                                             <div class="info-post">
                                                 <label>Periodo</label>
                                                 <p><?= $datos_ficha->periodo ?></p>
@@ -40,14 +40,23 @@
                                                 <label>Desde/Hasta</label>
                                                 <p><?= $datos_ficha->fdes ?> / <?= $datos_ficha->fhas ?></p>
 
-                                                <label>Documento</label>
-                                                <p><?= $datos_ficha->facdoc ?></p>
+                                                <?php if($datos_ficha->docu):?>
+                                                    <a href="<?= base_url($datos_ficha->facdoc) ?>">
+                                                        <button class="btn btn-info btn-block">
+                                                            <span class="btn-label"><i class="fas fa-file-invoice"></i></span>
+                                                            Ver Documento Factura
+                                                        </button>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <label>Documento</label>
+                                                    <p><?= $datos_ficha->facdoc ?></p>
+                                                <?php endif; ?>
 
                                             </div>
                                         </div>
                                 
                                     </div>
-                                    <div class="separator-solid"></div>
+                                    <div class="separator-solid"></div> <!-- Edificio y piso -->
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label>Pertenece al edificio:</label>
@@ -66,7 +75,7 @@
                                             </div>
                                         </div>
                                     <div class="separator-solid"></div>
-                                    <a href="<?= base_url()?>Facturas"><button type="button" class="btn btn-danger" >Cerrar</button></a>
+                                    <a href="<?= base_url('Facturas')?>"><button type="button" class="btn btn-danger" >Cerrar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +92,7 @@
                             </div>
                         </div>
 
-                        <form role="form" action="<?= base_url()?>Facturas/modificar" method="POST"> <!-- Formulario --> 
+                        <form role="form" action="<?= base_url('Facturas/modificar')?>" enctype="multipart/form-data" method="post" accept-charset="utf-8"> <!-- Formulario --> 
                             <input type="hidden"  name="id" value="<?= $datos_ficha->id ?>">   
                             <div class="row">
                                 <div class="card-body">
@@ -169,7 +178,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12"> <!-- Asigna Piso a factura -->
+                                        <div class="col-md-6"> <!-- Asigna Piso a factura -->
                                             <div class="form-group form-group-default">
                                                 <label>Edificio / Piso</label>
                                                 <select class="form-control" name="idpiso">
@@ -180,6 +189,24 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6"> <!-- Documento Factura -->
+                                            <?php if($datos_ficha->docu): ?>
+                                                <a href="<?= base_url($datos_ficha->facdoc) ?>">
+                                                    <p class="btn btn-info btn-block">
+                                                        <span class="btn-label"><i class="fas fa-file-invoice"></i></span>
+                                                        Ver Documento Factura
+                                                    </p>
+                                                </a>
+
+                                            <?php else: ?>
+                                                <div class="form-group"> 
+                                                    <label for="FormControlFile1">Archivo Factura</label>
+                                                    <input name="archivoFactura" type="file" class="form-control-file">
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +351,7 @@
                             <div class="modal-body">
                                 <p class="small">Datos Factura</p>
 
-                                <form role="form" action="<?= base_url()?>Facturas/alta" method="POST"> <!-- Formulario --> 
+                                <form role="form" action="<?= base_url('Facturas/alta')?>" enctype="multipart/form-data" method="post" accept-charset="utf-8"> <!-- Formulario --> 
                                     <div class="row">
 
                                         <div class="col-md-6"> <!-- Numero Factura -->
@@ -418,6 +445,13 @@
                                                     <option value="<?= $regpisos->id; ?>"><?= $regpisos->nom_edificio.' / '.$regpisos->planta.' - '.$regpisos->puerta.' ESC: '.$regpisos->escalera; ?></option>
                                                 <?php endforeach; ?>
                                                 </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12"> <!-- Sube Archivo -->
+                                            <div class="form-group form-group-default"> 
+                                                <label for="FormControlFile1">Suba el documento de la Factura</label>
+                                                <input name="archivoFactura" type="file" class="form-control-file">
                                             </div>
                                         </div>
 

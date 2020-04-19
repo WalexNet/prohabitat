@@ -44,16 +44,16 @@ class Configuracion_model extends CI_Model
         //Preparamos parametros del archivo a subir
         $archivo = 'archivo';                               // el nombre del imput/file en el form
         $config['upload_path']      = './assets/img/';      // La carpeta donde se guardara
-        $config['allowed_types']    = 'gif|jpg|png';
+        $config['allowed_types']    = 'gif|jpg|png|svg';
         $config['max_size']         = 2000;                 // Max Tamaño en Kb
         $config['file_name']        = 'walex';              // El nombre que le pondremos
         $this->load->library('upload', $config);            // Cargamos la libreria y le pasamos la configuración
-        echo ('<pre>');
+        //echo ('<pre>');
         /**
          * El metodo do_upload se encarga de copiar el archivo al lugar deseado
          * con el nombre deseado y devuelve true si tuvo exito
          */
-        if (!$this->upload->do_upload($archivo)) echo $this->upload->display_errors();
+        $subearchivo = $this->upload->do_upload($archivo);
         
         // Preparamos los datos a guardar
         $data['nombre']         = $this->input->post('nombre', true);
@@ -71,7 +71,11 @@ class Configuracion_model extends CI_Model
         $data['cp']             = $this->input->post('cp', true);
         $data['obs']            = $this->input->post('obs', true);
         $data['nomcorto']       = $this->input->post('nomcorto', true);
-        $data['logo']           = $this->upload->data('full_path');
+        if ($subearchivo){
+            $data['logo'] = $this->upload->data('full_path');
+        }else{
+            $error = $this->upload->display_errors();
+        }
         // $datain solo los datos para la tabla inquilinos
         // guardamos en inquilinos porque es el USR que debe pagar
         // las facturos en periodos que no hay usuarios
@@ -86,8 +90,8 @@ class Configuracion_model extends CI_Model
         $this->db->update('empresa', $data, ['id' => 1]);
         $this->db->update('inquilinos', $datain, ['id' => 1]);
 
-        print_r($this->upload->data());
-        
+        // print_r($this->upload->data());
+        return $error;
 
     }
 

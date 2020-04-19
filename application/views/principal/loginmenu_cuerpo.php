@@ -169,15 +169,15 @@
                         <div class="collapse" id="incidencias">
                             <ul class="nav nav-collapse">
                                 
-                                <li> <!-- Seguimiento -->
-                                    <a href="<?= base_url()?>#">
-                                        <span class="sub-item">Seguimiento</span>
-                                    </a>
-                                </li>
-
                                 <li> <!-- Alta Incidencia -->
                                     <a href="<?= base_url()?>#">
                                         <span class="sub-item">Alta</span>
+                                    </a>
+                                </li>
+
+                                <li> <!-- Seguimiento -->
+                                    <a href="<?= base_url()?>#">
+                                        <span class="sub-item">Seguimiento</span>
                                     </a>
                                 </li>
 
