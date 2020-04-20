@@ -49,7 +49,7 @@ class Entsal_model extends CI_Model {
 
     public function get_ficha($id)
     {
-        return $this->db->get_where('inqui_entsal', array('idinqui'=>$id));
+        return $this->db->get_where('inqui_entsal', ['idinqui'=>$id]);
     }
 
     public function entrada()

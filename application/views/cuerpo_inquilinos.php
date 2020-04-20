@@ -152,7 +152,7 @@
                     <?php endif; ?>
 
                     <!-- Tabla Principal inicio-->
-                    <?php if (!$ficha && !$edita): ?> <!-- Si se pide ficha no entra en Tabla -->
+                    <?php if (!$ficha && !$edita): ?> <!-- Si no es ficha y no edita no entra en Tabla -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
@@ -246,7 +246,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="row justify-content-end">
-                                                    <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addRowModal">
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#addRowModal">
                                                         <i class="fa fa-plus"></i>
                                                         Usuario
                                                     </button>

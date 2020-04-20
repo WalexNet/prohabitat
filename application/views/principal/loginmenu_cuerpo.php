@@ -104,10 +104,11 @@
                                         <span class="sub-item">Pisos</span>
                                     </a>
                                 </li>
+                                <!-- ******************************************** -->
 
                                 <!-- Estas Tablas son exclusivas de las insidencias -->
                                 <li> <!-- Aseguradoras -->
-                                    <a href="<?= base_url()?>#">
+                                    <a href="<?= base_url('Aseguradora')?>">
                                         <span class="sub-item">Aseguradoras</span>
                                     </a>
                                 </li>
@@ -117,6 +118,7 @@
                                         <span class="sub-item">Profesionales</span>
                                     </a>
                                 </li>
+                                <!-- ********************************************** -->
                             </ul>
                         </div>
                     </li>

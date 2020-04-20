@@ -288,26 +288,20 @@
                                            <div class="card-footer">
                                                <div class="row">
 
-                                                   <div class="col-md-4"> <!-- Paginacion -->
+                                                   <div class="col-md-8"> <!-- Paginacion -->
                                                        <?php if ($paginacion) : ?>
                                                            <?= $this->pagination->create_links() ?>
                                                        <?php endif; ?>
                                                    </div>
 
-                                                   <div class="col-md-4"> <!-- Informcaion -->
-                                                       <div class="row justify-content-center">
-                                                           <p>1 de 400 pages</p>
-                                                       </div>
-                                                   </div>
-
-                                                   <DIV class="col-md-4"> <!-- Boton Añade edificio -->
+                                                   <div class="col-md-4"> <!-- Boton Añade edificio -->
                                                        <div class="row justify-content-end">
-                                                           <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addEdificio">
+                                                           <button class="btn btn-primary" data-toggle="modal" data-target="#addEdificio">
                                                                <i class="fa fa-plus"></i>
                                                                Edificio
                                                            </button>
                                                        </div>
-                                                   </DIV>
+                                                   </div>
 
                                                </div>
                                            </div>

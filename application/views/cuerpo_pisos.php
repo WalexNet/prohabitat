@@ -77,15 +77,12 @@
 
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-8">
                                     <?= $this->pagination->create_links()?>
                                 </div>
                                 <div class="col-sm-4">
-                                    <p>1 de 400 pages</p>
-                                </div>
-                                <div class="col-sm-4">
                                     <div class="row justify-content-end">
-                                        <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addRowModal">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#addRowModal">
                                             <i class="fa fa-plus"></i>
                                             Piso
                                         </button>
