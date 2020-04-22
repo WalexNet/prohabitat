@@ -28,8 +28,6 @@ class Aseguradora_model extends CI_Model
 
     // ------------------------------------------------------------------------
 
-
-    // ------------------------------------------------------------------------
     public function index()
     {
         // 
@@ -78,6 +76,39 @@ class Aseguradora_model extends CI_Model
     {
         return $this->db->delete('aseguradora', ['id'=>$id]);
     }
+
+    public function find_aseguradora()
+    {
+        $busqueda   = $this->input->post('buscar_aseguradora',true);
+
+        $this->db->or_like('propietario', $busqueda);
+        $this->db->or_like('titular', $busqueda);
+        $this->db->or_like('compania', $busqueda);
+        $datos = $this->db->get('aseguradora');
+
+        return $datos->result();
+    }
+
+    public function update_aseguradora($id)
+    {
+        $data['propietario']    = $this->input->post('propietario',true);
+        $data['titular']        = $this->input->post('titular',true);
+        $data['compania']       = $this->input->post('compania',true);
+        $data['tel1']           = $this->input->post('tel1',true);
+        $data['contacto1']      = $this->input->post('contacto1',true);
+        $data['email1']         = $this->input->post('email1',true);
+        $data['tel2']           = $this->input->post('tel2',true);
+        $data['contacto2']      = $this->input->post('contacto2',true);
+        $data['email2']         = $this->input->post('email2',true);
+        $data['dir']            = $this->input->post('dir',true);
+        $data['pob']            = $this->input->post('pob',true);
+        $data['prov']           = $this->input->post('prov',true);
+        $data['cp']             = $this->input->post('cp',true);
+        $data['obs']            = $this->input->post('obs',true);
+
+        return $this->db->update('aseguradora', $data, ['id' => $id]);
+    }
+
     // ------------------------------------------------------------------------
 
 }

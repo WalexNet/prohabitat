@@ -60,6 +60,7 @@ class Factura_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->delete('facturas');
+        
     }
 
     public function edit_factu($id)

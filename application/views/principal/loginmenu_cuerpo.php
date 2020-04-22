@@ -114,7 +114,7 @@
                                 </li>
 
                                 <li> <!-- Profesionales -->
-                                    <a href="<?= base_url()?>#">
+                                    <a href="<?= base_url('Profesional')?>">
                                         <span class="sub-item">Profesionales</span>
                                     </a>
                                 </li>

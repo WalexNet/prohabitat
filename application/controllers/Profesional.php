@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Controller Aseguradora
+ * Controller Profesional
  *
  * This controller for ...
  *
@@ -17,7 +17,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Aseguradora extends CI_Controller
+class Profesional extends CI_Controller
 {
     // Propiedades
     private $data       = [];       // Los datos de la tabla a vista Solo se toca en index()
@@ -31,7 +31,8 @@ class Aseguradora extends CI_Controller
         // comprobamos session
         if (!$this->session->login) redirect('Inicio');
         // Cargamos modelos
-        $this->load->model('Aseguradora_model');
+        $this->load->model('Profesional_model');
+        $this->load->model('Sector_model');
         // Cargamos Librerias
         $this->load->library('pagination');
     }
@@ -41,9 +42,9 @@ class Aseguradora extends CI_Controller
         // Empezamos con el paginador
         // Variables y Arreglos de configuracion del Paginador
         $limite = 5;                                                    // Cantidad de registros a mostrar
-        $totalreg = $this->Aseguradora_model->total_aseguradora();      // Nos devuelve el total de registros
+        $totalreg = $this->Profesional_model->total_profesional();      // Nos devuelve el total de registros
 
-        $config['base_url']    = base_url() . 'Aseguradora/index/';     // La funcion que llamara el paginador
+        $config['base_url']    = base_url() . 'Profesional/index/';     // La funcion que llamara el paginador
         $config['total_rows']  = $totalreg->TOTAL;                      // Total de registros de la consulta
         $config['per_page']    = $limite;                               // Numero de registros a mostrar por pagina
         $config['uri_segment'] = 3;
@@ -56,11 +57,12 @@ class Aseguradora extends CI_Controller
         // fin del paginador
 
         // Preparamos la vista modificando las propiedades
-        $listado = $this->Aseguradora_model->get_aseguradora($offset, $limite);
+        $listado = $this->Profesional_model->get_profesional($offset, $limite);
         // Vamos preparando el arreglo $this->datos
         // Si no hay Datos en la tabla no creamos la variable datos
         if (($listado || $this->datos)) $this->data['datos'] = ($this->datos) ? $this->datos : $listado;
-        $this->data['edita'] = $this->edita;
+        $this->data['sector']   = $this->Sector_model->get_sector();
+        $this->data['edita']    = $this->edita;
 
         // echo '<pre>';
         // print_r($this->data);
@@ -70,8 +72,8 @@ class Aseguradora extends CI_Controller
 
     public function vista()
     {
-        $data_enc_cuerpo['lugar']   = "Aseguradora";
-        $data_enc_cuerpo['uri']     = "Aseguradora";
+        $data_enc_cuerpo['lugar']   = "Profesional";
+        $data_enc_cuerpo['uri']     = "Profesional";
 
         $this->load->view('principal/header');                           // Obligado
         $this->load->view('principal/enca_logo_cuerpo');                 // Obligado
@@ -79,14 +81,14 @@ class Aseguradora extends CI_Controller
         $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);    // Obligado
         switch ($this->tipoVista) {
             case 0: // Listado
-                $this->load->view('aseguradora/cuerpo_aseguradora', $this->data);
+                $this->load->view('profesionales/cuerpo_profesional', $this->data);
                 break;
             case 1: // Ficha
-                $this->load->view('aseguradora/cuerpo_aseguradoraFicha', $this->data);
+                $this->load->view('profesionales/cuerpo_profesionalFicha', $this->data);
                 break;
             case 2: // Alta
             case 3: // Edición
-                $this->load->view('aseguradora/cuerpo_aseguradoraAltaEdita', $this->data);
+                $this->load->view('profesionales/cuerpo_profesionalAltaEdita', $this->data);
                 break;
         }
         $this->load->view('principal/pie_cuerpo');                       // Obligado
@@ -99,48 +101,50 @@ class Aseguradora extends CI_Controller
         $this->index();             // Enviamos a la vista
     }
 
-    public function anadeAseguradora()
+    public function altaProfesional()
     {
-        $this->Aseguradora_model->add_aseguradora();
+        $this->Profesional_model->add_profesional();
         $this->index();             // Enviamos a la vista
     }
 
     public function ficha($id)
     {
-        $this->datos        = $this->Aseguradora_model->get_ficha($id);
+        $this->datos        = $this->Profesional_model->get_ficha($id);
         $this->tipoVista    = 1;
         $this->index();             // Enviamos a la vista
     }
 
     public function editar($id)
     {
-        $this->datos        = $this->Aseguradora_model->get_ficha($id);
+        $this->datos        = $this->Profesional_model->get_ficha($id);
         $this->tipoVista    = 3;
         $this->edita        = true;
         $this->index();             // Enviamos a la vista
     }
 
-    public function editaAseguradora()
+    public function editaProfesional()
     {
         $id = $this->input->post('id',true);
-        $this->Aseguradora_model->update_aseguradora($id);
+        $this->Profesional_model->update_profesional($id);
         $this->index();             // Enviamos a la vista
     }
 
     public function baja($id)
     {
-        $this->Aseguradora_model->del_ficha($id);
+        $this->Profesional_model->del_ficha($id);
         $this->index();             // Enviamos a la vista
     }
 
     public function buscar()
     {
-        $this->datos        = $this->Aseguradora_model->find_aseguradora();
+        $this->datos        = $this->Profesional_model->find_profesional();
         $this->tipoVista    = 0;    // Listado
         $this->index();             // Enviamos a la vista
     }
+
+
 }
 
 
-/* End of file Aseguradora.php */
-/* Location: ./application/controllers/Aseguradora.php */
+/* End of file Profesional.php */
+/* Location: ./application/controllers/Profesional.php */

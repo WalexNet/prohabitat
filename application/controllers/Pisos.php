@@ -18,10 +18,10 @@ class Pisos extends CI_Controller {
 		// Empezamos con el paginador
 		// Variables y Arreglos de configuracion del Paginador
 		$limite = 5;											 // Cantidad de registros a mostrar
-		$total_edificios = $this->Pisos_model->total_pisos();	 // Nos devuelve el total de registros
+		$total_pisos = $this->Pisos_model->total_pisos();	 // Nos devuelve el total de registros
 
 		$config['base_url']    = base_url().'Pisos/index/';  // La funcion que llamara el paginador
-		$config['total_rows']  = $total_edificios->TOTAL; 		 // Total de registros de la consulta
+		$config['total_rows']  = $total_pisos->TOTAL; 		 // Total de registros de la consulta
 		$config['per_page']    = $limite;						 // Numero de registros a mostrar por pagina
 		$config['uri_segment'] = 3;
 		$config['num_links']   = 2;								 // Numero de links a mostrar antes y despues de la pagina actual
