@@ -56,7 +56,7 @@
                                                    </div>
                                                    <div class="col-md-6 text-right">
 
-                                                       <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addPiso">
+                                                       <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#addPiso">
                                                            <i class="fa fa-plus"></i>
                                                            A&ntilde;ade pisos a este edifcio
                                                        </button>

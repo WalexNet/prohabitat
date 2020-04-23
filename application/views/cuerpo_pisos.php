@@ -53,7 +53,7 @@
                                                 <td><?= $registro->escalera; ?></td>
                                                 <td><?= $registro->planta; ?></td>
                                                 <td><?= $registro->puerta; ?></td>
-                                                <td> <!-- Botones -->
+                                                <td width="10%"> <!-- Botones -->
                                                     <div class="form-button-action">
                                                         <button type="button" title="" class="btn btn-link btn-simple-danger" data-toggle="tooltip" data-original-title="Ver Ficha de Edificio que contiene el piso">
                                                             <a href="<?= base_url()?>Edificios/ficha/<?= $registro->idedificio; ?>"><i class="fa fa-book-reader"></i></a>

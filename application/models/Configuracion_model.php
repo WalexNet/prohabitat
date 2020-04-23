@@ -6,6 +6,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Model Configuracion_model
  *
  * This Model for ...
+ * Aqui se manejan las tablas Principales de la aplicación,
+ * Estas son:
+ *      Sector      : Es el Sector al que pertenece un profesional
+ *      Tipologia   : Tipo de Incidencia (Reparacion, Mantenimiento)
+ *      Estados     : Estado en el que esta una Incidencia (Abierta, cerrada, en proceso, etc.)
+ *      Servicios   : Tipo de servicio al que pertenece una factura (Luz, Gas, Agua)
  * 
  * @package		CodeIgniter
  * @category	Model
@@ -24,8 +30,6 @@ class Configuracion_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        // Cargamos Helpers
-        //$this->load->helper('archivos_helper');
     }
 
     // ------------------------------------------------------------------------
@@ -95,6 +99,26 @@ class Configuracion_model extends CI_Model
 
     }
 
+    // ------------------------------------------------------------------------
+    // Estas Funciones se encargan de Leer (get), añadir (add) y borrar (del)
+    // registros de las tablas sectores, tipologias, estados y servicios
+    // segun corresponda
+    public function get_datos($tabla)
+    {
+        $datos = $this->db->get($tabla);
+        return $datos->result();
+    }
+
+    public function add_datos($tabla)
+    {
+        $data['des'] = strtoupper($this->input->post('descripcion',true));
+        return $this->db->insert($tabla, $data);
+    }
+
+    public function del_datos($tabla, $id)
+    {
+        return $this->db->delete($tabla, ['id'=>$id]);
+    }
     // ------------------------------------------------------------------------
 
 }

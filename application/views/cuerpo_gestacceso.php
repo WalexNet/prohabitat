@@ -5,14 +5,14 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6"> <!-- Titulo -->
                                 <h3 class="card-title">Listado de Técnicos</h3>
                             </div>
                             
-                            <div class="col-md-6">
+                            <div class="col-md-6"> <!-- Formulario Busqueda -->
                                 <form role="form" action="<?= base_url('Gestaccesos/buscar')?>" method="POST"> <!-- Formulario --> 
                                     <div class="input-group input-group-sm hidden-xs" >
-                                        <input type="text" name="tecnic" class="form-control" placeholder="Buscar parcialmente por nombre, apellido, nick ó DNI">
+                                        <input tabindex="1" type="text" name="tecnic" class="form-control" placeholder="Buscar parcialmente por nombre, apellido, nick ó DNI">
 
                                         <div class="input-group-btn">
                                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -88,13 +88,10 @@
 
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-md-6">
                                 <?= $this->pagination->create_links()?>
                             </div>
-                            <div class="col-sm-4">
-                                <p>1 de 400 pages</p>
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-md-6">
                                 <div class="row justify-content-end">
                                     <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addRowModal">
                                         <i class="fa fa-plus"></i>
@@ -136,48 +133,48 @@
                                     <div class="col-md-6"> <!-- Nombres -->
                                         <div class="form-group form-group-default">
                                             <label>Nombres</label>
-                                            <input type="text" name="nombres" class="form-control" placeholder="Nombres" required>
+                                            <input tabindex="2" type="text" name="nombres" class="form-control" placeholder="Nombres" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6"> <!-- Apellidos -->
                                         <div class="form-group form-group-default">
                                             <label>Apellidos</label>
-                                            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" required>
+                                            <input tabindex="3" type="text" name="apellidos" class="form-control" placeholder="Apellidos" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6"> <!-- DNI -->
                                         <div class="form-group form-group-default">
                                             <label>DNI</label>
-                                            <input type="text" name="dni" class="form-control" placeholder="Rellene con el DNI o NIE" required>
+                                            <input tabindex="4" type="text" name="dni" class="form-control" placeholder="Rellene con el DNI o NIE" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6"> <!-- Telefono -->
                                         <div class="form-group form-group-default">
                                             <label>Telefono</label>
-                                            <input  type="text" name="telefono" class="form-control" placeholder="Telefono" required>
+                                            <input tabindex="5"  type="text" name="telefono" class="form-control" placeholder="Telefono" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6"> <!-- Nick -->
                                         <div class="form-group form-group-default">
                                             <label>Nombre Corto</label>
-                                            <input type="text" name="nomcorto" class="form-control" placeholder="Nombre Corto" required>
+                                            <input tabindex="6" type="text" name="nomcorto" class="form-control" placeholder="Nombre Corto" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6"> <!-- mail -->
                                         <div class="form-group form-group-default">
                                             <label>Mail</label>
-                                            <input type="email" class="form-control" name="mail" placeholder="Ingrese el mail" required>
+                                            <input tabindex="7" type="email" class="form-control" name="mail" placeholder="Ingrese el mail" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12"> <!-- Notas -->
                                         <div class="form-group form-group-default">
                                             <label>Notas</label>
-                                            <textarea class="form-control" name="comentario" placeholder="Escriba aqui sus Notas" rows="5"></textarea>
+                                            <textarea tabindex="8" class="form-control" name="comentario" placeholder="Escriba aqui sus Notas" rows="5"></textarea>
                                         </div>
                                     </div>
 

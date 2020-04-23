@@ -67,6 +67,12 @@
                                         </a>
                                     </li>
 
+                                    <li> <!-- Configuracion de Datos, (Sector, Tipologia, Estados y Servicios) -->
+                                        <a href="<?= base_url('Configuracion')?>">
+                                            <span class="sub-item">Configuración</span>
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -104,12 +110,18 @@
                                         <span class="sub-item">Pisos</span>
                                     </a>
                                 </li>
-                                <!-- ******************************************** -->
 
-                                <!-- Estas Tablas son exclusivas de las insidencias -->
+                                <!-- *********************************************** -->
+                                <!-- Estas Tablas son exclusivas de las incidencias  -->
                                 <li> <!-- Aseguradoras -->
                                     <a href="<?= base_url('Aseguradora')?>">
                                         <span class="sub-item">Aseguradoras</span>
+                                    </a>
+                                </li>
+
+                                <li> <!-- Polizas -->
+                                    <a href="<?= base_url('Poliza')?>">
+                                        <span class="sub-item">Pólizas</span>
                                     </a>
                                 </li>
 
@@ -118,7 +130,7 @@
                                         <span class="sub-item">Profesionales</span>
                                     </a>
                                 </li>
-                                <!-- ********************************************** -->
+                                <!-- *********************************************** -->
                             </ul>
                         </div>
                     </li>
@@ -172,7 +184,7 @@
                             <ul class="nav nav-collapse">
                                 
                                 <li> <!-- Alta Incidencia -->
-                                    <a href="<?= base_url()?>#">
+                                    <a href="<?= base_url('Incidencias/#')?>">
                                         <span class="sub-item">Alta</span>
                                     </a>
                                 </li>
