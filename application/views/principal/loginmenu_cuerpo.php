@@ -141,7 +141,7 @@
                             <p>informes</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse" id="info">
+                        <div class="collapse" id="info"> <!-- Estado Facturas e Incidencias -->
                             <ul class="nav nav-collapse">
 
                                 <li> <!-- Estado Facturas -->

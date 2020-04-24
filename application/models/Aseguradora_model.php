@@ -33,7 +33,7 @@ class Aseguradora_model extends CI_Model
         // 
     }
 
-    public function get_aseguradora($offset = FALSE, $limite = FALSE)
+    public function get_aseguradora($offset = 0, $limite = 0)
     {
         $this->db->order_by('id', 'DESC');
         $datos = $this->db->get('aseguradora', $limite, $offset);

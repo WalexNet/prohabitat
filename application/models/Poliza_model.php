@@ -35,10 +35,45 @@ class Poliza_model extends CI_Model
         // 
     }
 
+    public function get_polizas($offset = 0, $limite = 0)
+    {
+        $this->db->order_by('id', 'DESC');
+        $datos = $this->db->get('todo_poliza', $limite, $offset);
+        return $datos->result();
+    }
+
+    public function get_polizas_aseguradora($id)
+    {
+        $this->db->order_by('id', 'DESC');
+        $datos = $this->db->get_where('todo_poliza', ['idaseg'=>$id]);
+        return $datos->result();
+    }
+
+    public function total_poliza()
+    {
+        $ssql = $this->db->query("SELECT COUNT(*) as TOTAL from todo_poliza");
+        return $ssql->row();
+    }
+
     public function get_ficha($id)
     {
-        $res = $this->db->get_where('poliza', ['id'=>$id]);
+        $res = $this->db->get_where('todo_poliza', ['id'=>$id]);
         return $res->row();
+    }
+
+    public function find_poliza()
+    {
+        $busqueda   = $this->input->post('buscar_poliza',true);
+
+        $this->db->or_like('asegprop', $busqueda);
+        $this->db->or_like('asegtit', $busqueda);
+        $this->db->or_like('asegcomp', $busqueda);
+        $this->db->or_like('npoliza', $busqueda);
+        $this->db->or_like('referencia', $busqueda);
+        $this->db->or_like('titular', $busqueda);
+        $datos = $this->db->get('todo_poliza');
+
+        return $datos->result();
     }
 
     public function add_poliza()
@@ -65,6 +100,11 @@ class Poliza_model extends CI_Model
         $data['cobertura']      = $this->input->post('cobertura',true);
 
         return $this->db->update('poliza', $data, ['id'=>$id]);
+    }
+
+    public function del_poliza($id)
+    {
+        return $this->db->delete('poliza', ['id' => $id]);
     }
     // ------------------------------------------------------------------------
 

@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="row justify-content-end">
-                                    <a href="Aseguradora/formAlta" class="btn btn-primary">
+                                    <a href="<?= base_url('Aseguradora/formAlta')?>" class="btn btn-primary">
                                         <i class="fa fa-plus"></i>
                                         Aseguradora
                                     </a>

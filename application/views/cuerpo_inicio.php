@@ -3,10 +3,10 @@
             <div class="page-category"> <!-- Dentro de este DIV es donde ponemos los componentes o sea, nuestro cuerpo de accion -->
             
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6"> <!-- Gráfico de Facturas --> 
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="card-title">Estado de las Facturas</h2>
+                                <a href="<?= base_url('Estadofacturas')?>"><h2 class="card-title">Estado de las Facturas</h2></a> 
                             </div>
                             
                             <div class="card-body">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-6">
+                    <div class="col-md-6"> <!-- Gráfico de Incidencias --> 
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="card-title">Estado de las Incidencias</h2>

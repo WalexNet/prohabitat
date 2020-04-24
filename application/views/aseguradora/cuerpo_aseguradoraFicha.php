@@ -98,8 +98,8 @@
                             <a href="<?= base_url('Aseguradora/editar/'.$datos->id) ?>">
                                 <button type="submit" class="btn btn-primary">Editar</button>
                             </a>
-                            <a href="<?= base_url('Poliza/agregar/'.$datos->id) ?>">
-                                <button type="submit" class="btn btn-secondary">Añade Poliza</button>
+                            <a href="<?= base_url('Aseguradora/listaPolizas/'.$datos->id) ?>">
+                                <button type="submit" class="btn btn-secondary">Muestra Pólizas</button>
                             </a>
                         </div>
 

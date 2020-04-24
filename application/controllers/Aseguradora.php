@@ -21,7 +21,7 @@ class Aseguradora extends CI_Controller
 {
     // Propiedades
     private $data       = [];       // Los datos de la tabla a vista Solo se toca en index()
-    private $tipoVista  = 0;        // 0-> Listado, 1-> Ficha, 2-> Form Alta, 3-> Form Edicion
+    private $tipoVista  = 0;        // 0-> Listado, 1-> Ficha, 2-> Form Alta, 3-> Form Edicion, 4-> Aseguradora+Polizas
     private $edita      = false;    // Bandera de edición
     private $datos      = null;     // Los datos que se envian a la vista 
 
@@ -32,6 +32,7 @@ class Aseguradora extends CI_Controller
         if (!$this->session->login) redirect('Inicio');
         // Cargamos modelos
         $this->load->model('Aseguradora_model');
+        $this->load->model('Poliza_model');
         // Cargamos Librerias
         $this->load->library('pagination');
     }
@@ -88,6 +89,8 @@ class Aseguradora extends CI_Controller
             case 3: // Edición
                 $this->load->view('aseguradora/cuerpo_aseguradoraAltaEdita', $this->data);
                 break;
+            case 4: // Aseguradora mas Pólizas
+                $this->load->view('aseguradora/cuerpo_aseguradoraFichaPolizas', $this->data);
         }
         $this->load->view('principal/pie_cuerpo');                       // Obligado
         $this->load->view('principal/foot');                             // Obligado
@@ -138,6 +141,17 @@ class Aseguradora extends CI_Controller
         $this->datos        = $this->Aseguradora_model->find_aseguradora();
         $this->tipoVista    = 0;    // Listado
         $this->index();             // Enviamos a la vista
+    }
+
+    public function listaPolizas($id)
+    {
+        $this->tipoVista    = 4;
+        $this->datos        = $this->Poliza_model->get_polizas_aseguradora($id);
+
+        // echo '<pre>';
+        // print_r($this->datos);
+
+        $this->index();
     }
 }
 

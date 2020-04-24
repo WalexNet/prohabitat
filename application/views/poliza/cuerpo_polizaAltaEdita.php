@@ -6,24 +6,59 @@
                 <form action="<?= base_url('Poliza/editaPoliza') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                     <input type="hidden" name="id" value="<?= $datos->id ?>">
                     <input type="hidden" name="idaseg" value="<?= $datos->idaseg ?>">
-                    <div class="card">
 
+                    <div class="card"> <!-- Datos de la Aseguradora -->
                         <div class="card-header">
-                            <h2 class="card-title">Datos de la Aseguradora</h2>
+                            <h2 class="card-title">Va a modificar una Póliza de la Aseguradora</h2>
                         </div>
                         
                         <div class="card-body">
-
                             <div class="row">
-                                <div class="col-md-12"> 
+                                <div class="col-md-4"> <!-- Col 1 -->
+                                    <div class="form-group form-group-default"> <!-- AsegComp -->
+                                        <label class="control-label">Compañía</label>
+                                        <p class="form-control-static"><?= $datos->asegcomp ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4"> <!-- Col 2 -->
+                                    <div class="form-group form-group-default"> <!-- AsagProp -->
+                                        <label class="control-label">Propietario</label>
+                                        <p class="form-control-static"><?= $datos->asegprop ?></p>
+                                    </div>
+                                </div>    
+
+                                <div class="col-md-4"> <!-- Col 3 -->
+                                    <div class="form-group form-group-default"> <!-- AsegTit -->
+                                        <label class="control-label">Titular</label>
+                                        <p class="form-control-static"><?= $datos->asegtit ?></p>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="card"> <!-- Datos de la Póliza -->
+
+                        <div class="card-header">
+                            <h2 class="card-title">Datos de la Póliza</h2>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="row"> <!-- Datos de la Póliza -->
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- npoliza -->
                                         <label>Nro Poliza</label>
                                         <input tabindex="1" type="text" name="npoliza" value="<?= $datos->npoliza ?>" class="form-control" placeholder="Nro de Poliza" required>
                                     </div>
+                                </div>
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- referencia -->
                                         <label>Referencia</label>
                                         <input tabindex="2" type="text" name="referencia" value="<?= $datos->referencia ?>" class="form-control" placeholder="Referencia">
                                     </div>
+                                </div>
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- titular -->
                                         <label>Titular</label>
                                         <input tabindex="3" type="text" name="titular" value="<?= $datos->titular ?>" class="form-control" placeholder="Titular">
@@ -31,7 +66,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row"> <!-- Fechas -->
                                 <div class="col-md-6"> <!-- femision -->
                                     <div class="form-group form-group-default"> 
                                         <label>Fecha de Emision</label>
@@ -78,25 +113,60 @@
                 </form>
             <?php else: ?> <!-- Añade Póliza -->
                 <form action="<?= base_url('Poliza/altaPoliza') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-                    <input type="hidden" name="idaseg" value="<?= $idaseguradora ?>">
-                    <div class="card">
+                    <input type="hidden" name="idaseg" value="<?= $aseguradora->id ?>">
 
+                    <div class="card"> <!-- Datos de la Aseguradora -->
                         <div class="card-header">
-                            <h2 class="card-title">Datos de la Aseguradora</h2>
+                            <h2 class="card-title">Va a añadir una Póliza de la Aseguradora</h2>
                         </div>
                         
                         <div class="card-body">
-
                             <div class="row">
-                                <div class="col-md-12"> 
+                                <div class="col-md-4"> <!-- Col 1 -->
+                                    <div class="form-group form-group-default"> <!-- AsegComp -->
+                                        <label class="control-label">Compañía</label>
+                                        <p class="form-control-static"><?= $aseguradora->compania ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4"> <!-- Col 2 -->
+                                    <div class="form-group form-group-default"> <!-- AsagProp -->
+                                        <label class="control-label">Propietario</label>
+                                        <p class="form-control-static"><?= $aseguradora->propietario ?></p>
+                                    </div>
+                                </div>    
+
+                                <div class="col-md-4"> <!-- Col 3 -->
+                                    <div class="form-group form-group-default"> <!-- AsegTit -->
+                                        <label class="control-label">Titular</label>
+                                        <p class="form-control-static"><?= $aseguradora->titular ?></p>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="card"> <!-- Datos de la Póliza -->
+
+                        <div class="card-header">
+                            <h2 class="card-title">Nueva Póliza</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row"> <!-- Datos de la poliza -->
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- npoliza -->
                                         <label>Nro Poliza</label>
                                         <input tabindex="1" type="text" name="npoliza" class="form-control" placeholder="Nro de Poliza" required>
                                     </div>
+                                </div>
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- referencia -->
                                         <label>Referencia</label>
                                         <input tabindex="2" type="text" name="referencia" class="form-control" placeholder="Referencia">
                                     </div>
+                                </div>
+                                <div class="col-md-4"> 
                                     <div class="form-group form-group-default"> <!-- titular -->
                                         <label>Titular</label>
                                         <input tabindex="3" type="text" name="titular" class="form-control" placeholder="Titular">
@@ -104,7 +174,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row"> <!-- Fechas de la poliza -->
                                 <div class="col-md-6"> <!-- femision -->
                                     <div class="form-group form-group-default"> 
                                         <label>Fecha de Emision</label>
@@ -129,7 +199,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="card-footer">
@@ -145,7 +214,6 @@
                                 </div>
                             </div>
                         </div>
-
                     
                     </div>
                 </form>
