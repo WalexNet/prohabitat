@@ -28,11 +28,12 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 
-# Prohabitat
-tests/tests/
-tests/results/
-assets/css/
-assets/fonts/
-assets/img/
-assets/sass/
-Docus/
+# Prohabitat Desmarcar para que git no lo tenga encuenta
+
+# tests/tests/
+# tests/results/
+# assets/css/
+# assets/fonts/
+# assets/img/
+# assets/sass/
+# Docus/

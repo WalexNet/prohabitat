@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <meta charset="UTF-8">
 	<title>Walex.NET APP's</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="<?= base_url() ?>assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="<?= base_url('assets/img/walex.ico') ?>" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="<?= base_url() ?>assets/js/plugin/webfont/webfont.min.js"></script>

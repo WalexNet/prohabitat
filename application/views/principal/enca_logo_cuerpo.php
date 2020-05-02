@@ -4,7 +4,7 @@
     <div class="logo-header" data-background-color="dark2">
         
         <a href="http://www.walex.net" class="logo">
-            <img src="<?= base_url() ?>assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+            <img src="<?= base_url('assets/img/walex.svg') ?>" alt="navbar brand" class="navbar-brand">
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
