@@ -160,7 +160,7 @@
                                     <!-- Si editamos Usuario o tecnico no editamos perfil solo cuando mostramos ficha-->
                                     <?php if(!$editar): ?>
                                     <div class="card-footer">
-                                        <button class="btn btn-primary btn-round ml-auto mb-3" data-toggle="modal" data-target="#addForm" >
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#addForm" >
                                         <i class="fa fa-plus"></i>Perfil</button>
                                     </div>
                                     <?php endif; ?>

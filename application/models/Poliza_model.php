@@ -37,14 +37,14 @@ class Poliza_model extends CI_Model
 
     public function get_polizas($offset = 0, $limite = 0)
     {
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('npoliza');
         $datos = $this->db->get('todo_poliza', $limite, $offset);
         return $datos->result();
     }
 
     public function get_polizas_aseguradora($id)
     {
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('npoliza');
         $datos = $this->db->get_where('todo_poliza', ['idaseg'=>$id]);
         return $datos->result();
     }

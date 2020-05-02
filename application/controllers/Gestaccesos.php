@@ -56,23 +56,29 @@ class Gestaccesos extends CI_Controller
         // Finalizamos paginador
         // *************************
         // Configuramos las varibles y/o datos de las vistas
-        $data_enc_cuerpo['lugar']   = ($this->editar) ? "Técnicos / Gestion de Accessos / Edición":"Técnicos / Gestion de Accessos";
-        $data_enc_cuerpo['uri']     = "Gestaccesos";
+        
 
         $this->datos['editar']      = $this->editar;
         $this->datos['consulta']    = ($this->verFicha) ? $this->ficha : (($this->buscar) ? $this->ficha : $this->Tecnicos_model->get_tecnic($offset,$limite));
         $this->datos['perfil']      = $this->perfil;
 
-        // Cargamos las vistas
+       $this->vista();
+    }
+
+    public function vista()
+    {   
+        $data_enc_cuerpo['lugar']   = ($this->editar) ? "Técnicos / Gestion de Accessos / Edición":"Técnicos / Gestion de Accessos";
+        $data_enc_cuerpo['uri']     = "Gestaccesos";
+         // Cargamos las vistas
         $this->load->view('principal/header');                          // 
         $this->load->view('principal/enca_logo_cuerpo');                // 
         $this->load->view('principal/loginmenu_cuerpo');                // 
         $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // 
 
         if($this->verFicha){
-            $this->load->view('cuerpo_editaacceso', $this->datos);
+            $this->load->view('tecnicosAcceso/cuerpo_editaacceso', $this->datos);
         }else{
-            $this->load->view('cuerpo_gestacceso', $this->datos);       // 
+            $this->load->view('tecnicosAcceso/cuerpo_gestacceso', $this->datos);       // 
         }
                    
         $this->load->view('principal/pie_cuerpo');                      // 

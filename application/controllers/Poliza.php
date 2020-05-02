@@ -46,9 +46,9 @@ class Poliza extends CI_Controller
         // Empezamos con el paginador
         // Variables y Arreglos de configuracion del Paginador
         $limite = 5;                                                    // Cantidad de registros a mostrar
-        $totalreg = $this->Poliza_model->total_poliza();      // Nos devuelve el total de registros
+        $totalreg = $this->Poliza_model->total_poliza();                // Nos devuelve el total de registros
 
-        $config['base_url']    = base_url() . 'Poliza/index/';     // La funcion que llamara el paginador
+        $config['base_url']    = base_url() . 'Poliza/index/';          // La funcion que llamara el paginador
         $config['total_rows']  = $totalreg->TOTAL;                      // Total de registros de la consulta
         $config['per_page']    = $limite;                               // Numero de registros a mostrar por pagina
         $config['uri_segment'] = 3;

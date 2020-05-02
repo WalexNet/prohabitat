@@ -3,6 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Facturas extends CI_Controller
 {
+    // Propiedades
+    private $data = [];
+
     public function __construct()
     {
         parent::__construct();
@@ -25,14 +28,14 @@ class Facturas extends CI_Controller
     {
         // Empezamos con el paginador
         // Variables y Arreglos de configuracion del Paginador
-        $limite = 5;                                            // Numero de registros a mostrar con 0 mostramos todos y no muestra el paginador
-        $total_factu = $this->Factura_model->total_factu();    // Nos devuelve el total de registros
+        $limite = 5;                                             // Numero de registros a mostrar con 0 mostramos todos y no muestra el paginador
+        $total_factu = $this->Factura_model->total_factu();      // Nos devuelve el total de registros
 
         $config['base_url']    = base_url() . 'Facturas/index/'; // La funcion que llamara el paginador
         $config['total_rows']  = $total_factu->TOTAL;            // Total de registros de la consulta
-        $config['per_page']    = $limite;                       // Numero de registros a mostrar por pagina
+        $config['per_page']    = $limite;                        // Numero de registros a mostrar por pagina
         $config['uri_segment'] = 3;
-        $config['num_links']   = 2;                               // Numero de links a mostrar antes y despues de la pagina actual
+        $config['num_links']   = 2;                              // Numero de links a mostrar antes y despues de la pagina actual
 
         // Fin de la configuracion
         // La configuracion del paginador esta en application/config/pagination.php
@@ -41,9 +44,7 @@ class Facturas extends CI_Controller
 
         // fin del paginador
 
-        // Variables del encabezado de la vista
-        $data_enc_cuerpo['lugar'] = "Facturas";
-        $data_enc_cuerpo['uri'] = "Facturas";
+        
 
         // Configuramos  las variables del cuerpo de la vista
         if ($result === null) {
@@ -51,23 +52,32 @@ class Facturas extends CI_Controller
         }
 
         if ($ficha or $edita) {
-            $data['datos_ficha'] = $datos_ficha->row();
+            $this->data['datos_ficha'] = $datos_ficha->row();
         }
 
-        $data['servicios'] = $this->Servicios_model->get_servicios();
-        $data['pisos']     = $this->Pisos_model->get_pisos();
-        $data['consulta']  = $result;
-        $data['ficha']        = $ficha;
-        $data['edita']       = $edita;
+        $this->data['servicios'] = $this->Servicios_model->get_servicios();
+        $this->data['pisos']     = $this->Pisos_model->get_pisos();
+        $this->data['consulta']  = $result;
+        $this->data['ficha']     = $ficha;
+        $this->data['edita']     = $edita;
 
+        $this->vista();
+    }
+
+    
+    public function vista()
+    {
+        // Variables del encabezado de la vista
+        $data_enc_cuerpo['lugar'] = "Facturas";
+        $data_enc_cuerpo['uri'] = "Facturas";
         // Cargamos las Vistas
-        $this->load->view('principal/header'); // Obligado
-        $this->load->view('principal/enca_logo_cuerpo'); // Obligado
-        $this->load->view('principal/loginmenu_cuerpo'); // Obligado
-        $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo); // Obligado
-        $this->load->view('cuerpo_factura', $data); // Segun corresponda
-        $this->load->view('principal/pie_cuerpo'); // Obligado
-        $this->load->view('principal/foot'); // Obligado
+        $this->load->view('principal/header');                          // Obligado
+        $this->load->view('principal/enca_logo_cuerpo');                // Obligado
+        $this->load->view('principal/loginmenu_cuerpo');                // Obligado
+        $this->load->view('principal/enca_cuerpo', $data_enc_cuerpo);   // Obligado
+        $this->load->view('cuerpo_factura', $this->data);               // Segun corresponda
+        $this->load->view('principal/pie_cuerpo');                      // Obligado
+        $this->load->view('principal/foot');                            // Obligado
     }
 
     public function ficha($id)

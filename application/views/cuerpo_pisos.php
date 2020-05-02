@@ -11,7 +11,7 @@
                                     <h2 class="card-title">Mantenimiento del archivo Pisos</h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <form role="form" action="<?= base_url()?>Pisos/buscar" method="POST"> <!-- Formulario Busqueda--> 
+                                    <form role="form" action="<?= base_url('Pisos/buscar')?>" method="POST"> <!-- Formulario Busqueda--> 
                                         <div class="input-group input-group-sm hidden-xs" >
                                             <input type="text" name="buscar_piso" class="form-control" placeholder="Buscar pisos por nombre de Edificio">
 
@@ -30,6 +30,7 @@
                                     <thead>
                                         <tr>
                                             <th><label>Edificio</label></th>
+                                            <th><label>Nº Póliza</label></th>
                                             <th><label>Escalera</label></th>
                                             <th><label>Planta</label></th>
                                             <th><label>Puerta</label></th>
@@ -39,6 +40,7 @@
                                     <tfoot>
                                         <tr>
                                             <th><label>Edificio</label></th>
+                                            <th><label>Nº Póliza</label></th>
                                             <th><label>Escalera</label></th>
                                             <th><label>Planta</label></th>
                                             <th><label>Puerta</label></th>
@@ -50,19 +52,20 @@
                                         <?php foreach ($consulta->result() as $registro): ?>
                                             <tr>
                                                 <td><?= $registro->nom_edificio; ?></td>
+                                                <td><a href="<?= base_url('Poliza/verFicha/'.$registro->idpoliza)?>"> <?= $registro->npoliza; ?> </a></td>
                                                 <td><?= $registro->escalera; ?></td>
                                                 <td><?= $registro->planta; ?></td>
                                                 <td><?= $registro->puerta; ?></td>
                                                 <td width="10%"> <!-- Botones -->
                                                     <div class="form-button-action">
                                                         <button type="button" title="" class="btn btn-link btn-simple-danger" data-toggle="tooltip" data-original-title="Ver Ficha de Edificio que contiene el piso">
-                                                            <a href="<?= base_url()?>Edificios/ficha/<?= $registro->idedificio; ?>"><i class="fa fa-book-reader"></i></a>
+                                                            <a href="<?= base_url('Edificios/ficha/'.$registro->idedificio)?>"><i class="fa fa-book-reader"></i></a>
                                                         </button>
                                                         <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-primary btn-lg" data-original-title="Editar">
-                                                            <a href="<?= base_url()?>Pisos/editar/<?= $registro->id; ?>"><i class="fa fa-edit"></i></a>
+                                                            <a href="<?= base_url('Pisos/editar/'.$registro->id)?>"><i class="fa fa-edit"></i></a>
                                                         </button>
                                                         <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-danger" data-original-title="Eliminar">
-                                                            <a href="<?= base_url()?>Pisos/baja/<?= $registro->id; ?>" onclick="return confirmar('Realmente desea ELIMINAR este piso?')"><i class="fa fa-times"></i></a>
+                                                            <a href="<?= base_url('Pisos/baja/'.$registro->id)?>" onclick="return confirmar('Realmente desea ELIMINAR este piso?')"><i class="fa fa-times"></i></a>
                                                         </button>
                                                     </div>
                                                 </td>
@@ -75,7 +78,7 @@
                             </div> 
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer"> <!-- Navegador y boton añadir -->
                             <div class="row">
                                 <div class="col-sm-8">
                                     <?= $this->pagination->create_links()?>
@@ -92,7 +95,7 @@
                             </div>
                         </div>
                     </div>
-                <?php else: ?>
+                <?php else: ?> <!--  Edita Registro -->
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Modifique datos del Piso</div>
@@ -101,44 +104,54 @@
                         <form role="form" action="<?= base_url()?>Pisos/modificar" method="POST"> <!-- Formulario --> 
                             <input type="hidden"  name="id" value="<?= $datos_ficha->id ?>">  
                             <div class="card-body">
-                                <div class="row">
 
-                                    <div class="col-md-12"> <!-- Edificios -->
+                                <div class="row">
+                                    <div class="col-md-3"> <!-- Edificios -->
                                         <div class="form-group form-group-default">
                                             <label>Edificio</label>
                                             <select class="form-control" name="idEdificio">
-                                            <?php foreach ($edificios->result() as $regedi): ?>
-                                                <option value="<?= $regedi->id; ?>" <?php if ($regedi->id == $datos_ficha->idEdificio) echo 'selected'?>>     <?= $regedi->nombre; ?></option>
+                                            <?php foreach ($edificios->result() as $registro): ?>
+                                                <option value="<?= $registro->id; ?>" <?php if ($registro->id == $datos_ficha->idEdificio) echo 'selected'?>>     <?= $registro->nombre; ?></option>
                                             <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-12"> <!-- Escalera -->
+                                    <div class="col-md-3"> <!-- Escalera -->
                                         <div class="form-group form-group-default">
                                             <label>Escalera:</label>
                                             <input type="text" name="escalera" value="<?=$datos_ficha->escalera ?>" class="form-control" placeholder="Nro o Letra de escalera">
                                         </div>
                                     </div>
-                                    <div class="col-md-12"> <!-- Planta -->
+                                    <div class="col-md-3"> <!-- Planta -->
                                         <div class="form-group form-group-default">
                                             <label>Planta </label>
                                             <input type="text" name="planta" value="<?=$datos_ficha->planta ?>" class="form-control" placeholder="Nro o letra de Planta">
                                         </div>
                                     </div>
-                                    <div class="col-md-12"> <!-- Puerta -->
+                                    <div class="col-md-3"> <!-- Puerta -->
                                         <div class="form-group form-group-default">
                                             <label>Puerta</label>
                                             <input type="text" name="puerta" value="<?=$datos_ficha->puerta ?>" class="form-control" placeholder="Nro o letra de puerta">
                                         </div>
                                     </div>
-                                    <div class="col-md-12"> <!-- Notas -->
+                                </div>
+
+                                <div class="row"> <!-- Poliza -->
+                                    <div class="col-md-3"> 
+                                        <div class="form-group form-group-default">
+                                            <label>Nro Poliza - Aseguradora</label>
+                                            <select class="form-control" name="idPoliza">
+                                            <?php foreach ($polizas as $registro): ?><option value="<?= $registro->id; ?>" <?php if ($registro->id == $datos_ficha->idpoliza) echo 'selected'?>> <?= $registro->npoliza.' - '.$registro->asegcomp; ?></option>
+                                            <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9"> <!-- Notas -->
                                         <div class="form-group form-group-default">
                                             <label>Notas</label>
                                             <textarea class="form-control" name="notas"  placeholder="Escriba aqui sus Notas" rows="5"><?=$datos_ficha->notas ?></textarea>
                                         </div>
                                     </div>
-
                                 </div>
                                 
                             </div>
@@ -180,8 +193,8 @@
                                             <div class="form-group form-group-default">
                                                 <label>Edificio</label>
                                                 <select class="form-control" name="idEdificio">
-                                                <?php foreach ($edificios->result() as $regedi): ?>
-                                                    <option value="<?= $regedi->id; ?>" ><?= $regedi->nombre; ?></option>
+                                                <?php foreach ($edificios->result() as $registro): ?>
+                                                    <option value="<?= $registro->id; ?>" ><?= $registro->nombre; ?></option>
                                                 <?php endforeach; ?>
                                                 </select>
                                             </div>

@@ -16,16 +16,13 @@ class Pisos_model extends CI_Model {
 
     public function add_piso()
     {
-        $idEdificio = $this->input->post('idEdificio', true);
-        $planta     = strtoupper($this->input->post('planta', true));
-        $escalera   = strtoupper($this->input->post('escalera', true));
-        $puerta     = strtoupper($this->input->post('puerta', true));
-        $notas      = $this->input->post('notas', true);
+        $data['idEdificio'] = $this->input->post('idEdificio', true);
+        $data['planta']     = strtoupper($this->input->post('planta', true));
+        $data['escalera']   = strtoupper($this->input->post('escalera', true));
+        $data['puerta']     = strtoupper($this->input->post('puerta', true));
+        $data['notas']      = $this->input->post('notas', true);
 
-        $ssql = "INSERT INTO pisos (idEdificio, planta, puerta, escalera, notas)
-                VALUES('$idEdificio', '$planta', '$puerta', '$escalera', '$notas')";
-
-        $this->db->query($ssql);
+        $this->db->insert('pisos', $data);
 
     }
 
@@ -37,29 +34,32 @@ class Pisos_model extends CI_Model {
 
     public function get_ficha($id)
     {
-        return $this->db->get_where('pisos', array('id'=>$id));
+        return $this->db->get_where('pisos', ['id'=>$id]);
     }
 
     public function edit_piso($id)
     {
-        $idEdificio = $this->input->post('idEdificio', true);
-        $planta     = strtoupper($this->input->post('planta', true));
-        $escalera   = strtoupper($this->input->post('escalera', true));
-        $puerta     = strtoupper($this->input->post('puerta', true));
-        $notas      = $this->input->post('notas', true);
+        $data['idEdificio'] = $this->input->post('idEdificio', true);
+        $data['idpoliza']   = $this->input->post('idPoliza', true);
+        $data['planta']     = strtoupper($this->input->post('planta', true));
+        $data['escalera']   = strtoupper($this->input->post('escalera', true));
+        $data['puerta']     = strtoupper($this->input->post('puerta', true));
+        $data['notas']      = $this->input->post('notas', true);
 
-        $ssql = "UPDATE pisos
-        SET idEdificio=$idEdificio, planta='$planta', puerta='$puerta', escalera='$escalera', notas='$notas'
-        WHERE id=$id
-        ";
-
-        return $this->db->query($ssql);
+        return $this->db->update('pisos', $data, ['id'=>$id]);
     }
 
     public function del_piso($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('pisos');
+        return $this->db->delete('pisos');
+    }
+
+    public function find_piso()
+    {
+        $busqueda = $this->input->post('buscar_piso',true);
+        $this->db->like('nom_edificio', $busqueda);
+        return $this->db->get('todo_pisos');
     }
 
 
