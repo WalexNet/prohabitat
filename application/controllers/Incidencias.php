@@ -36,7 +36,7 @@ class Incidencias extends CI_Controller
         $this->load->library('pagination');
     }
 
-    public function index($offset)
+    public function index($offset = 0)
     {
         // Empezamos con el paginador
         // Variables y Arreglos de configuracion del Paginador
